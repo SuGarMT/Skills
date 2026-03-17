@@ -14,29 +14,29 @@
 
 :root {
     /* 核心色板 */
-    --bg-deep: #0a0a12;
-    --bg-surface: #12121e;
-    --bg-card: rgba(255, 255, 255, 0.04);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --bg-deep: #050508;
+    --bg-surface: #0a0a10;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
 
-    --accent-1: #00E5FF;
-    /* Cyan Main */
-    --accent-2: #8b5cf6;
-    /* Violet */
-    --accent-3: #FF0055;
-    /* Magenta */
+    --accent-1: #FF5533;
+    /* Orange/Red */
+    --accent-2: #00E5FF;
+    /* Cyan */
+    --accent-3: #FF5533;
+    /* Secondary Orange */
     --accent-4: #FAFF00;
-    /* Amber/Yellow */
+    /* Yellow */
 
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-muted: rgba(255, 255, 255, 0.45);
 
     --border: rgba(255, 255, 255, 0.08);
-    --border-accent: rgba(99, 102, 241, 0.3);
+    --border-accent: rgba(0, 229, 255, 0.3);
 
-    --glow-accent: rgba(99, 102, 241, 0.4);
-    --glow-cyan: rgba(6, 182, 212, 0.3);
+    --glow-accent: rgba(255, 85, 51, 0.3);
+    --glow-cyan: rgba(0, 229, 255, 0.3);
 
     /* 字体 */
     --font-heading: 'Inter', 'Noto Sans SC', sans-serif;
@@ -66,9 +66,7 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 120%, rgba(99, 102, 241, 0.08) 0%, transparent 70%),
-        var(--bg-deep);
+    background: var(--bg-deep);
 }
 
 /* ── 翻页转场 ──────────────────────────────────── */
@@ -165,130 +163,159 @@ body {
 
 
 /* ═══════════════════════════════════════════════
-   1. productSlide - 封面 (Flat, Ultra-Vibrant, Geometric)
+   1. coverSlide - 横版封面 (Minimal Dark Neon)
    ═══════════════════════════════════════════════ */
-.type-product {
-    background: #00E5FF;
-    /* 极致亮青色底 */
+.type-cover {
+    background: var(--bg-deep);
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     overflow: hidden;
 }
 
-/* 巨幅对角切割，使用高饱和的纯粉红 */
-.flat-bg-rect {
+/* =========================================================================
+   AURORA THEME (For Covers)
+   ========================================================================= */
+
+.aurora-theme {
+    background: #0a0a12;
+    overflow: hidden;
+}
+
+.aurora-bg {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 65%;
-    height: 100%;
-    background: #FF0055;
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    z-index: 0;
-}
-
-/* 巨大的明黄色圆点装饰 */
-.flat-bg-circle {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    width: 600px;
-    height: 600px;
-    background: #FAFF00;
-    border-radius: 50%;
-    z-index: 0;
-}
-
-.flat-content {
-    position: relative;
-    z-index: 10;
+    left: 0;
     width: 100%;
     height: 100%;
-    padding: 100px 140px;
+    z-index: 0;
+    filter: blur(100px);
+    opacity: 0.8;
+}
+
+.aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatOrb 15s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle, #ff5533 0%, transparent 70%);
+    top: -20%;
+    left: -20%;
+}
+
+.orb-2 {
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(circle, #00e5ff 0%, transparent 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 70vw;
+    height: 70vh;
+    background: radial-gradient(circle, #faff00 0%, transparent 60%);
+    top: 30%;
+    left: 40%;
+    animation-delay: -10s;
+    opacity: 0.5;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(100px, 50px) scale(1.1);
+    }
+}
+
+.aurora-content-wrapper {
+    position: relative;
+    z-index: 10;
+    /* Remove glass blur */
+    background: transparent;
+    padding: 60px 80px;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 85%;
+    width: 100%;
 }
 
-.flat-header {
-    margin-bottom: auto;
+/* Decorative Extra Tags/Blocks to enrich colors */
+.aurora-decor-line {
+    width: 60px;
+    height: 6px;
+    background: #00e5ff;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
-.flat-badge {
-    background: #FAFF00;
-    /* 明黄底，纯黑字 */
-    color: #000000;
-    font-family: var(--font-mono);
-    font-size: 24px;
-    font-weight: 900;
-    padding: 16px 40px;
+.aurora-extra-tag {
+    color: #0a0a12;
+    background: #faff00;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    border-radius: 4px;
     display: inline-block;
+    margin-top: 16px;
+    box-shadow: 0 4px 10px rgba(250, 255, 0, 0.4);
 }
 
-.flat-main {
-    margin: auto 0;
-}
-
-.flat-title-wrapper {
-    margin-bottom: 40px;
-}
-
-.flat-title {
-    font-size: 140px;
-    font-weight: 900;
-    line-height: 1.25;
-    color: #000000;
-    /* 极致反差，纯黑标题 */
-    letter-spacing: -4px;
-    text-transform: uppercase;
-    /* 极致高级街头感排版：利用纯白背景断行包裹文字 */
-    background: #FFFFFF;
-    display: inline;
-    padding: 15px 30px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-}
-
-.flat-tagline-wrapper {
-    margin-top: 50px;
-}
-
-.flat-tagline {
-    font-size: 40px;
-    color: #FFFFFF;
-    background: #000000;
-    /* 极致反差，纯黑底白字 */
-    display: inline-block;
-    padding: 24px 48px;
+.aurora-badge {
+    color: #fff;
+    background: linear-gradient(90deg, #ff5533, #ff8866);
+    font-size: 14px;
     font-weight: 700;
-    line-height: 1.4;
-    max-width: 1200px;
-}
-
-.flat-footer {
-    margin-top: auto;
-}
-
-.flat-btn {
-    background: #000000;
-    color: #00E5FF;
-    font-size: 32px;
-    font-weight: 900;
-    padding: 28px 80px;
-    display: inline-block;
+    padding: 8px 24px;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, transform 0.2s, padding 0.2s;
+    letter-spacing: 3px;
+    display: inline-block;
+    border-radius: 50px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(255, 85, 51, 0.3);
 }
 
-.flat-btn:hover {
-    background: #FF0055;
-    color: #FFFFFF;
-    padding-left: 100px;
-    padding-right: 60px;
+.aurora-title-wrapper {
+    margin-bottom: 24px;
+}
+
+.aurora-title {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #ffffff;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.aurora-tagline-wrapper {
+    margin-top: 16px;
+}
+
+.aurora-tagline {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.aurora-btn {
+    display: none;
+    /* Can be enabled if user wants a CTA */
 }
 
 
@@ -1832,4 +1859,103 @@ body {
 
 .vc-footer {
     margin-top: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   Global Header & Footer 
+   ═══════════════════════════════════════════════ */
+.global-header {
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    font-family: var(--font-body);
+}
+
+.gh-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.gh-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gh-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    padding: 4px 14px 4px 4px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.gh-right:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.gh-avatar-wrapper {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gh-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gh-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    letter-spacing: 0.5px;
+}
+
+.global-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    pointer-events: none;
+    /* So it doesn't block clicks */
+}
+
+.page-number-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    backdrop-filter: blur(10px);
 }

@@ -1,31 +1,33 @@
 const layouts = {
+
     // ══════════════════════════════════════════════
-    // 1. productSlide - 封面/产品介绍（优化版）
+    // 1. verticalCoverSlide - 9:16 竖版通用封面 [NEW]
     // ══════════════════════════════════════════════
-    productSlide: {
+    verticalCoverSlide: {
         props: ['name', 'tagline', 'series'],
         template: `
-            <div class="slide type-product">
-                <!-- 巨幅对角切割纯色几何背景，完全摒弃了毛玻璃、环境光与立体特效以打造极度扁平的高对比排版 -->
-                <div class="flat-bg-rect"></div>
-                <div class="flat-bg-circle"></div>
-                
-                <div class="flat-content">
+            <div class="slide type-vertical-cover aurora-theme">
+                <div class="aurora-bg">
+                    <div class="aurora-orb orb-1"></div>
+                    <div class="aurora-orb orb-2"></div>
+                    <div class="aurora-orb orb-3"></div>
+                </div>
+                <!-- 移除毛玻璃，使用纯净的透明容器包裹 -->
+                <div class="aurora-content-wrapper">
+                    <div class="aurora-decor-line"></div>
+                    
                     <div class="flat-header">
-                        <span class="flat-badge" v-if="series">{{ series }}</span>
+                        <span class="aurora-badge" v-if="series">{{ series }}</span>
                     </div>
                     
                     <div class="flat-main">
-                        <div class="flat-title-wrapper">
-                            <h1 class="flat-title" v-if="name">{{ name }}</h1>
+                        <div class="aurora-title-wrapper">
+                            <h1 class="aurora-title" v-if="name">{{ name }}</h1>
                         </div>
-                        <div class="flat-tagline-wrapper">
-                            <div class="flat-tagline" v-if="tagline">{{ tagline }}</div>
+                        <div class="aurora-tagline-wrapper">
+                            <div class="aurora-tagline" v-if="tagline">{{ tagline }}</div>
+                            <span class="aurora-extra-tag">PRO Edition</span>
                         </div>
-                    </div>
-                    
-                    <div class="flat-footer">
-                        <div class="flat-btn">Explore Now</div>
                     </div>
                 </div>
             </div>
@@ -33,7 +35,41 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 2. titleSlide - 章节标题
+    // 2. coverSlide - 横版封面 [Renamed from productSlide]
+    // ══════════════════════════════════════════════
+    coverSlide: {
+        props: ['name', 'tagline', 'series'],
+        template: `
+            <div class="slide type-cover aurora-theme">
+                <div class="aurora-bg">
+                    <div class="aurora-orb orb-1"></div>
+                    <div class="aurora-orb orb-2"></div>
+                    <div class="aurora-orb orb-3"></div>
+                </div>
+                <!-- 移除毛玻璃，使用纯净的透明容器包裹 -->
+                <div class="aurora-content-wrapper">
+                    <div class="aurora-decor-line"></div>
+                    
+                    <div class="flat-header">
+                        <span class="aurora-badge" v-if="series">{{ series }}</span>
+                    </div>
+                    
+                    <div class="flat-main">
+                        <div class="aurora-title-wrapper">
+                            <h1 class="aurora-title" v-if="name">{{ name }}</h1>
+                        </div>
+                        <div class="aurora-tagline-wrapper">
+                            <div class="aurora-tagline" v-if="tagline">{{ tagline }}</div>
+                            <span class="aurora-extra-tag">PRO Edition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // ══════════════════════════════════════════════
+    // 3. titleSlide - 章节标题
     // ══════════════════════════════════════════════
     titleSlide: {
         props: ['title', 'subtitle'],
@@ -48,7 +84,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 3. highlightSlide - 重点高亮
+    // 4. highlightSlide - 重点高亮
     // ══════════════════════════════════════════════
     highlightSlide: {
         props: ['prefix', 'highlight', 'gradientClass'],
@@ -61,7 +97,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 4. textSlide - 主文本
+    // 5. textSlide - 主文本
     // ══════════════════════════════════════════════
     textSlide: {
         props: ['prefix', 'mainText'],
@@ -74,7 +110,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 5. questionSlide - 提问页
+    // 6. questionSlide - 提问页
     // ══════════════════════════════════════════════
     questionSlide: {
         props: ['question'],
@@ -82,20 +118,6 @@ const layouts = {
             <div class="slide type-question">
                 <div class="question-icon">?</div>
                 <div class="question" v-if="question">{{ question }}</div>
-            </div>
-        `
-    },
-
-    // ══════════════════════════════════════════════
-    // 6. endSlide - 结束页
-    // ══════════════════════════════════════════════
-    endSlide: {
-        props: ['message'],
-        template: `
-            <div class="slide type-end">
-                <div class="end-glow"></div>
-                <div class="end-icon">◆</div>
-                <div class="message" v-if="message">{{ message }}</div>
             </div>
         `
     },
@@ -452,84 +474,19 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 22. conflictCoverSlide - 16:9 横版冲突封面 [NEW]
+    // 22. endSlide - 结束页
     // ══════════════════════════════════════════════
-    conflictCoverSlide: {
-        props: ['leftSub', 'leftHeadline', 'leftDesc', 'rightSub', 'rightHeadline', 'rightDesc'],
+    endSlide: {
+        props: ['message'],
         template: `
-            <div class="slide type-conflict">
-                <div class="conflict-side conflict-left alignment-right">
-                    <div class="conflict-content">
-                        <div class="conflict-sub" v-if="leftSub">{{ leftSub }}</div>
-                        <h1 class="conflict-headline" v-html="leftHeadline"></h1>
-                        <p class="number-desc" style="text-align: right;" v-if="leftDesc">{{ leftDesc }}</p>
-                    </div>
-                </div>
-                <div class="conflict-badge">VS</div>
-                <div class="conflict-side conflict-right alignment-left">
-                    <div class="conflict-content">
-                        <div class="conflict-sub" v-if="rightSub">{{ rightSub }}</div>
-                        <h1 class="conflict-headline" v-html="rightHeadline"></h1>
-                        <p class="number-desc" style="text-align: left; color: rgba(255,255,255,0.7);" v-if="rightDesc">{{ rightDesc }}</p>
-                    </div>
-                </div>
+            <div class="slide type-end">
+                <div class="end-glow"></div>
+                <div class="end-icon">◆</div>
+                <div class="message" v-if="message">{{ message }}</div>
             </div>
         `
     },
 
-    // ══════════════════════════════════════════════
-    // 23. verticalConflictSlide - 9:16 竖版冲突封面 [NEW]
-    // ══════════════════════════════════════════════
-    verticalConflictSlide: {
-        props: ['topSub', 'topHeadline', 'topDesc', 'bottomSub', 'bottomHeadline', 'bottomDesc'],
-        template: `
-            <div class="slide type-vertical-conflict">
-                <div class="mobile-wrapper">
-                    <div class="conflict-side conflict-top alignment-left">
-                        <div class="conflict-content">
-                            <div class="conflict-sub" v-if="topSub">{{ topSub }}</div>
-                            <h1 class="conflict-headline" v-html="topHeadline"></h1>
-                            <p class="number-desc" style="text-align: left;" v-if="topDesc">{{ topDesc }}</p>
-                        </div>
-                    </div>
-                    <div class="conflict-badge">VS</div>
-                    <div class="conflict-side conflict-bottom alignment-right">
-                        <div class="conflict-content">
-                            <div class="conflict-sub" v-if="bottomSub">{{ bottomSub }}</div>
-                            <h1 class="conflict-headline" v-html="bottomHeadline"></h1>
-                            <p class="number-desc" style="text-align: right; color: rgba(255,255,255,0.7);" v-if="bottomDesc">{{ bottomDesc }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-    },
-    // ══════════════════════════════════════════════
-    // 24. verticalCoverSlide - 9:16 竖版通用封面 [NEW]
-    // ══════════════════════════════════════════════
-    verticalCoverSlide: {
-        props: ['name', 'tagline', 'series'],
-        template: `
-            <div class="slide type-vertical-cover">
-                <div class="mobile-wrapper">
-                    <div class="vc-bg-shape"></div>
-                    <div class="vc-bg-circle"></div>
-                    <div class="vc-content">
-                        <div class="vc-header">
-                            <span class="flat-badge" v-if="series">{{ series }}</span>
-                        </div>
-                        <div class="vc-main">
-                            <h1 class="vc-title" v-if="name">{{ name }}</h1>
-                            <div class="vc-tagline" v-if="tagline">{{ tagline }}</div>
-                        </div>
-                        <div class="vc-footer">
-                            <div class="flat-btn">Explore Now</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-    }
 };
 
 export { layouts };

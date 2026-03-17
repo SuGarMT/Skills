@@ -47,6 +47,7 @@ mkdir -p "$OUTPUT"
 # ── 复制模板文件 ──
 cp "$TEMPLATE_DIR/styles.css" "$OUTPUT/styles.css"
 cp "$TEMPLATE_DIR/layouts.js" "$OUTPUT/layouts.js"
+cp -f "$TEMPLATE_DIR/pic.jpg" "$OUTPUT/pic.jpg" 2>/dev/null || true
 
 echo "✓ 模板文件已复制到 $OUTPUT"
 
@@ -74,14 +75,29 @@ HEREDOC_HEAD
 <body>
     <div id="app">
         <div class="presentation-container" @click="next">
+            <!-- Global Header -->
+            <div class="global-header">
+                <div class="gh-left">
+                    <span class="gh-title">${TITLE}</span>
+                </div>
+                <div class="gh-right">
+                    <div class="gh-avatar-wrapper">
+                        <img src="./pic.jpg" alt="Avatar" class="gh-avatar">
+                    </div>
+                    <span class="gh-author">MT</span>
+                </div>
+            </div>
+
             <transition name="fade" mode="out-in">
                 <component :is="currentSlide.layout" v-bind="currentSlide.props" :key="currentIndex">
                 </component>
             </transition>
-            <div class="nav-controls" @click.stop>
-                <button @click.stop="prev">&lt;</button>
-                <span>{{ String(currentIndex + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2, '0') }}</span>
-                <button @click.stop="next">&gt;</button>
+
+            <!-- Global Footer -->
+            <div class="global-footer">
+                <div class="page-number-pill">
+                    {{ String(currentIndex + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2, '0') }}
+                </div>
             </div>
         </div>
     </div>

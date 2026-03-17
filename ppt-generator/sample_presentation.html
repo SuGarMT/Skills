@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>模板样例展示 — Ultimate Dark</title>
+      <link rel="stylesheet" href="resources/ppt-template/styles.css?v=2">
+      <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+
+<body>
+      <div id="app">
+            <div class="presentation-container" @click="next">
+                  <!-- Global Header -->
+                  <div class="global-header">
+                        <div class="gh-left">
+                              <span class="gh-title">模板演示 PPT</span>
+                        </div>
+                        <div class="gh-right">
+                              <div class="gh-avatar-wrapper">
+                                    <img src="resources/ppt-template/pic.jpg" alt="Avatar" class="gh-avatar">
+                              </div>
+                              <span class="gh-author">MT</span>
+                        </div>
+                  </div>
+
+                  <transition name="fade" mode="out-in">
+                        <component :is="currentSlide.layout" v-bind="currentSlide.props" :key="currentIndex">
+                        </component>
+                  </transition>
+
+                  <!-- Global Footer -->
+                  <div class="global-footer">
+                        <div class="page-number-pill">
+                              {{ String(currentIndex + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2,
+                              '0') }}
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <script type="module">
+            import { layouts } from './resources/ppt-template/layouts.js?v=2';
+
+            // Exactly 22 layouts matching the latest layouts.js
+            const slides = [
+                  {
+                        layout: 'verticalCoverSlide',
+                        props: {
+                              "series": "1. verticalCoverSlide - 9:16 竖版通用封面 [NEW]",
+                              "tagline": "设计好结构，执行力就是你的超能力",
+                              "name": "verticalCoverSlide"
+                        }
+                  },
+                  {
+                        layout: 'coverSlide',
+                        props: {
+                              "series": "2. coverSlide - 横版封面 [Renamed from productSlide]",
+                              "tagline": "设计好结构，执行力就是你的超能力",
+                              "name": "coverSlide"
+                        }
+                  },
+                  {
+                        layout: 'titleSlide',
+                        props: {
+                              "subtitle": "3. titleSlide - 章节标题",
+                              "title": "titleSlide"
+                        }
+                  },
+                  {
+                        layout: 'highlightSlide',
+                        props: {
+                              "prefix": "4. highlightSlide - 重点高亮",
+                              "highlight": "全局统一样式的暗色背景让焦点重归内容本身。",
+                              "gradientClass": "gradient-text-accent"
+                        }
+                  },
+                  {
+                        layout: 'textSlide',
+                        props: {
+                              "prefix": "5. textSlide - 主文本",
+                              "mainText": "设计不再是杂乱无章的平铺，而是对信息的归类与提炼。"
+                        }
+                  },
+                  {
+                        layout: 'questionSlide',
+                        props: {
+                              "question": "6. questionSlide - 提问页"
+                        }
+                  },
+                  {
+                        layout: 'splitSlide',
+                        props: {
+                              "badge": "7. splitSlide - 左右分栏",
+                              "title": "极简与实用的分栏展示",
+                              "description": "完美适应各类复杂的展示需求",
+                              "stats": [
+                                    {
+                                          "value": "100%",
+                                          "label": "屏占比优化"
+                                    }
+                              ],
+                              "cards": {
+                                    "header": "特性组件",
+                                    "tag": "PRO",
+                                    "items": [
+                                          {
+                                                "icon": "⚡️",
+                                                "title": "实时渲染",
+                                                "desc": "基于 Vue 3 的极速响应",
+                                                "color": "rgba(255, 85, 51, 0.1)",
+                                                "textColor": "#FF5533"
+                                          },
+                                          {
+                                                "icon": "🎨",
+                                                "title": "一键换肤",
+                                                "desc": "CSS 变量驱动",
+                                                "color": "rgba(0, 229, 255, 0.1)",
+                                                "textColor": "#00E5FF"
+                                          }
+                                    ]
+                              }
+                        }
+                  },
+                  {
+                        layout: 'statsSlide',
+                        props: {
+                              "title": "8. statsSlide - 数据统计",
+                              "subtitle": "核心指标",
+                              "items": [
+                                    {
+                                          "value": "300%",
+                                          "label": "视觉聚焦度",
+                                          "desc": "相较旧版背景",
+                                          "gradientClass": "gradient-text-accent"
+                                    },
+                                    {
+                                          "value": "25+",
+                                          "label": "可用组件",
+                                          "desc": "灵活搭配"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'featureListSlide',
+                        props: {
+                              "title": "9. featureListSlide - 功能特性列表",
+                              "features": [
+                                    {
+                                          "icon": "✦",
+                                          "title": "高对比度",
+                                          "desc": "暗色背景让亮色内容更抓眼",
+                                          "color": "rgba(255, 85, 51, 0.15)",
+                                          "textColor": "#FF5533"
+                                    },
+                                    {
+                                          "icon": "🛡️",
+                                          "title": "结构统一",
+                                          "desc": "全局页眉页脚注定专业视觉",
+                                          "color": "rgba(0, 229, 255, 0.15)",
+                                          "textColor": "#00E5FF"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'glassCardSlide',
+                        props: {
+                              "title": "10. glassCardSlide - 玻璃卡片",
+                              "items": [
+                                    {
+                                          "icon": "✦",
+                                          "title": "晶莹剔透",
+                                          "desc": "模糊背景滤镜"
+                                    },
+                                    {
+                                          "icon": "◆",
+                                          "title": "边界清晰",
+                                          "desc": "细微的边框勾勒"
+                                    },
+                                    {
+                                          "icon": "❖",
+                                          "title": "动态浮现",
+                                          "desc": "悬停时细腻的交互反馈"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'terminalSlide',
+                        props: {
+                              "title": "11. terminalSlide - 终端代码",
+                              "lines": [
+                                    {
+                                          "prompt": "$",
+                                          "text": "npx serve .",
+                                          "color": "green"
+                                    },
+                                    {
+                                          "text": "Starting local development server...",
+                                          "color": "dim"
+                                    },
+                                    {
+                                          "text": "Listening on http://localhost:8080/",
+                                          "color": "cyan"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'definitionSlide',
+                        props: {
+                              "term": "12. definitionSlide - 定义解释",
+                              "definition": "整个作品使用统一的对齐方式、颜色、页边距和页眉页脚，大幅降低读者的认知压力。",
+                              "note": "不仅是在视觉上，逻辑上的组织更为重要。"
+                        }
+                  },
+                  {
+                        layout: 'comparisonSlide',
+                        props: {
+                              "title": "13. comparisonSlide - 对比",
+                              "left": {
+                                    "label": "旧排版",
+                                    "items": [
+                                          {
+                                                "icon": "×",
+                                                "title": "缺乏焦点",
+                                                "desc": "花哨的东西太多"
+                                          },
+                                          {
+                                                "icon": "×",
+                                                "title": "布局冲突",
+                                                "desc": "不同页面元素位置跳动"
+                                          }
+                                    ]
+                              },
+                              "right": {
+                                    "label": "新版式",
+                                    "items": [
+                                          {
+                                                "icon": "✓",
+                                                "title": "模块化组件",
+                                                "desc": "严格遵从版式栅格"
+                                          },
+                                          {
+                                                "icon": "✓",
+                                                "title": "统一挂件",
+                                                "desc": "固定页脚页眉更显专业"
+                                          }
+                                    ]
+                              }
+                        }
+                  },
+                  {
+                        layout: 'flowSlide',
+                        props: {
+                              "title": "14. flowSlide - 流程图",
+                              "steps": [
+                                    {
+                                          "title": "提取核心",
+                                          "desc": "文字精简为卡片"
+                                    },
+                                    {
+                                          "title": "选择模板",
+                                          "desc": "布局一键转换"
+                                    },
+                                    {
+                                          "title": "呈现演示",
+                                          "desc": "HTML快速渲染"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'timelineSlide',
+                        props: {
+                              "title": "15. timelineSlide - 时间线 [NEW]",
+                              "events": [
+                                    {
+                                          "date": "V1.0",
+                                          "title": "最初版本",
+                                          "desc": "基于简单背景构建"
+                                    },
+                                    {
+                                          "date": "V2.0",
+                                          "title": "深度改版",
+                                          "desc": "转向 Dark Neon 风格，增加全局页眉页脚"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'quoteSlide',
+                        props: {
+                              "quote": "16. quoteSlide - 引用/金句 [NEW]",
+                              "author": "演示文稿名言"
+                        }
+                  },
+                  {
+                        layout: 'imageTextSlide',
+                        props: {
+                              "badge": "多图排版",
+                              "title": "17. imageTextSlide - 图文混排 [NEW]",
+                              "description": "视觉冲击力比文字更有说服力。将配图结合图文展现。",
+                              "imageUrl": "resources/ppt-template/pic.jpg"
+                        }
+                  },
+                  {
+                        layout: 'listSlide',
+                        props: {
+                              "title": "18. listSlide - 要点列表 [NEW]",
+                              "items": [
+                                    {
+                                          "title": "对齐",
+                                          "desc": "统一元素边距和对齐方向"
+                                    },
+                                    {
+                                          "title": "对比",
+                                          "desc": "放大核心标题，缩小次要说明"
+                                    },
+                                    {
+                                          "title": "重复",
+                                          "desc": "使用相同的主题色与字体"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'numberSlide',
+                        props: {
+                              "number": "10",
+                              "unit": "x",
+                              "label": "19. numberSlide - 大数字展示 [NEW]",
+                              "description": "使用全局 UI 和布局模板，制作速度成倍加快。"
+                        }
+                  },
+                  {
+                        layout: 'teamSlide',
+                        props: {
+                              "title": "20. teamSlide - 团队/人物卡片 [NEW]",
+                              "members": [
+                                    {
+                                          "name": "MT",
+                                          "role": "演讲者",
+                                          "desc": "方案设计与落地",
+                                          "initial": "M",
+                                          "color": "linear-gradient(135deg, #FF5533, #FF8866)"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'gallerySlide',
+                        props: {
+                              "title": "21. gallerySlide - 图片画廊 [NEW]",
+                              "items": [
+                                    {
+                                          "title": "方案一",
+                                          "desc": "Proposal A",
+                                          "color": "rgba(255, 85, 51, 0.2)"
+                                    },
+                                    {
+                                          "title": "方案二",
+                                          "desc": "Proposal B",
+                                          "color": "rgba(0, 229, 255, 0.2)"
+                                    },
+                                    {
+                                          "title": "方案三",
+                                          "desc": "Proposal C",
+                                          "color": "rgba(250, 255, 0, 0.2)"
+                                    }
+                              ]
+                        }
+                  },
+                  {
+                        layout: 'endSlide',
+                        props: {
+                              "message": "22. endSlide - 结束页"
+                        }
+                  }
+            ];
+
+            const app = Vue.createApp({
+                  data() {
+                        return { slides, currentIndex: 0 };
+                  },
+                  computed: {
+                        currentSlide() { return this.slides[this.currentIndex]; }
+                  },
+                  methods: {
+                        next() {
+                              if (this.currentIndex < this.slides.length - 1) this.currentIndex++;
+                        },
+                        prev() {
+                              if (this.currentIndex > 0) this.currentIndex--;
+                        }
+                  },
+                  mounted() {
+                        window.addEventListener('keydown', (e) => {
+                              if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); this.next(); }
+                              if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); this.prev(); }
+                        });
+                  }
+            });
+
+            for (const [name, config] of Object.entries(layouts)) {
+                  app.component(name, config);
+            }
+            app.mount('#app');
+      </script>
+</body>
+
+</html>

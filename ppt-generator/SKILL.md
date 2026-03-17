@@ -26,7 +26,7 @@ description: "使用 ultimate-dark 模板生成高质量 PPT（presentation.html
 
 ## 乔布斯式标题生成规则
 
-> 以下规则适用于**章节标题页（titleSlide）、高亮金句（highlightSlide）、提问页（questionSlide）**。
+> 以下规则适用于**章节标题页（titleSlide）、核心观点（messageSlide）、提问页（questionSlide）**。
 > 内容页（列表、流程、数据等）使用清晰准确的标题即可。
 
 ### 核心原则
@@ -58,11 +58,10 @@ description: "使用 ultimate-dark 模板生成高质量 PPT（presentation.html
 |---------|-------------|------|
 | 封面（coverSlide） | ✅ 使用 | 第一印象需要吸引力 |
 | 章节标题（titleSlide） | ✅ 使用 | 表达章节核心观点或处理思路 |
-| 高亮金句（highlightSlide） | ✅ 使用 | 核心观点需要穿透力 |
+| 核心观点（messageSlide） | ✅ 使用 | 核心观点需要穿透力 |
 | 提问页（questionSlide） | ✅ 使用 | 引发思考的钩子 |
-| 数据页（statsSlide、numberSlide） | ❌ 清晰即可 | 数据说话，标题准确描述即可 |
-| 定义页（definitionSlide） | ❌ 清晰即可 | 解释性内容，清晰优先 |
-| 列表页（listSlide、featureListSlide） | ❌ 清晰即可 | 信息传递，多用步骤化表达 |
+| 数据页（statsSlide） | ❌ 清晰即可 | 数据说话，标题准确描述即可 |
+| 列表页（listSlide、cardGridSlide） | ❌ 清晰即可 | 信息传递，多用步骤化表达 |
 | 流程页（flowSlide、timelineSlide） | ❌ 清晰即可 | 逻辑性内容，易读为上 |
 | 对比页（comparisonSlide） | 🔶 视情况 | 如果有鲜明对比可以用 |
 
@@ -244,8 +243,7 @@ npx vite --port 5173 --host
 | 布局 | 用途 | 参数 |
 |------|------|------|
 | `titleSlide` | 章节标题页（乔布斯风） | `title`, `subtitle` |
-| `highlightSlide` | 核心金句/高亮 | `prefix`(前缀), `highlight`(高亮文字), `gradientClass` |
-| `textSlide` | 简单观点/关键句 | `prefix`, `mainText` |
+| `messageSlide` | 核心观点大字报 | `prefix`(前缀), `message`(正文), `highlight`(布尔值，是否渐变高亮) |
 | `questionSlide` | 提问页 | `question` |
 | `quoteSlide` | 引用/名言 | `quote`, `author`, `role` |
 | `endSlide` | 结束页 | `message` |
@@ -255,17 +253,14 @@ npx vite --port 5173 --host
 | 布局 | 用途 | 参数 |
 |------|------|------|
 | `statsSlide` | 数据统计(多指标) | `title`, `subtitle`, `items[]`(value/label/desc/gradientClass) |
-| `numberSlide` | 大数字展示 | `number`, `unit`, `label`, `description` |
 | `comparisonSlide` | 对比(左右) | `title`, `left`(label/items[]), `right`(label/items[]) |
-| `definitionSlide` | 定义/概念解释 | `term`, `definition`, `note` |
 
 ### 列表/卡片类
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
 | `splitSlide` | 左右分栏(信息面板) | `badge`, `title`, `description`, `cards`(header/tag/items[]), `stats[]` |
-| `featureListSlide` | 功能特性网格 | `title`, `features[]`(icon/title/desc/color/textColor) |
-| `glassCardSlide` | 玻璃毛刺卡片 | `title`, `items[]`(icon/title/desc) |
+| `cardGridSlide` | 多特性卡片阵列 | `title`, `cards[]`(icon/title/desc/color/textColor) |
 | `listSlide` | 编号要点列表 | `title`, `items[]`(title/desc) |
 
 ### 流程/时间类
@@ -280,7 +275,7 @@ npx vite --port 5173 --host
 | 布局 | 用途 | 参数 |
 |------|------|------|
 | `terminalSlide` | 终端/代码展示 | `title`, `lines[]`(prompt/text/color) |
-| `imageTextSlide` | 图文混排(左图右文) | `title`, `description`, `imageUrl`, `badge` |
+| `imageTextSlide` | 图文混排（截图与解决方案） | `[title, description, imageUrl, badge, solution]` |
 | `teamSlide` | 团队/人物卡片 | `title`, `members[]`(name/role/desc/initial/color) |
 | `gallerySlide` | 图片画廊(3列) | `title`, `items[]`(title/desc/imageUrl/color) |
 

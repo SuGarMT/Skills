@@ -17,8 +17,8 @@ description: "根据用户提供的排版要求（大纲文件）或描述，使
 
 每次生成 PPT 时固定第一页为封面：
 
-| 页面 | 布局 | 参数 |
-|------|------|------|
+| 页面                      | 布局           | 参数                                                                                         |
+| ------------------------- | -------------- | -------------------------------------------------------------------------------------------- |
 | **第1页：横版封面** | `coverSlide` | `name` (核心主题), `series` (系列/大主题), `tagline` (关键字标签), `icon` (必备图标) |
 
 ## 乔布斯式标题生成规则
@@ -30,16 +30,16 @@ description: "根据用户提供的排版要求（大纲文件）或描述，使
 
 1. **一句话原则**: 每个标题必须能在一口气内说完
 2. **紧贴主题**: 标题直接表达当前章节的核心观点或处理思路
-4. **比喻驱动**: 用具体事物解释抽象概念
+3. **比喻驱动**: 用具体事物解释抽象概念
 
 ### 标题类型模板
 
-| 类型             | 公式                 | 示例                         |
-| ---------------- | -------------------- | ---------------------------- |
-| **对比式** | "A是X，Y是B"         | "MCP是工具箱，SKILL是说明书" |
-| **比喻式** | "X就像Y"             | "AI用工具，像在开盲盒"       |
-| **问题式** | "为什么..." "...吗?" | "到底学哪个?"                |
-| **断言式** | "一句话总结"         | "三步搞定环境配置"           |
+| 类型             | 公式                 | 示例                           |
+| ---------------- | -------------------- | ------------------------------ |
+| **对比式** | "A是X，Y是B"         | "MCP是工具箱，SKILL是说明书"   |
+| **比喻式** | "X就像Y"             | "AI用工具，像在开盲盒"         |
+| **问题式** | "为什么..." "...吗?" | "到底学哪个?"                  |
+| **断言式** | "一句话总结"         | "三步搞定环境配置"             |
 | **递进式** | "从X到Y"             | "从手动到自动，只差一个 Skill" |
 
 ### 标题生成步骤
@@ -51,16 +51,16 @@ description: "根据用户提供的排版要求（大纲文件）或描述，使
 
 ### 何时使用乔布斯模式
 
-| 页面类型 | 是否使用乔布斯模式 | 说明 |
-|---------|-------------|------|
-| 封面（coverSlide） | ✅ 使用 | 第一印象需要吸引力 |
-| 章节标题（titleSlide） | ✅ 使用 | 表达章节核心观点或处理思路 |
-| 核心观点（messageSlide） | ✅ 使用 | 核心观点需要穿透力 |
-| 提问页（questionSlide） | ✅ 使用 | 引发思考的钩子 |
-| 数据页（statsSlide） | ❌ 清晰即可 | 数据说话，标题准确描述即可 |
-| 列表页（listSlide、cardGridSlide） | ❌ 清晰即可 | 信息传递，多用步骤化表达 |
-| 流程页（flowSlide、timelineSlide） | ❌ 清晰即可 | 逻辑性内容，易读为上 |
-| 对比页（comparisonSlide） | 🔶 视情况 | 如果有鲜明对比可以用 |
+| 页面类型                           | 是否使用乔布斯模式 | 说明                       |
+| ---------------------------------- | ------------------ | -------------------------- |
+| 封面（coverSlide）                 | ✅ 使用            | 第一印象需要吸引力         |
+| 章节标题（titleSlide）             | ✅ 使用            | 表达章节核心观点或处理思路 |
+| 核心观点（messageSlide）           | ✅ 使用            | 核心观点需要穿透力         |
+| 提问页（questionSlide）            | ✅ 使用            | 引发思考的钩子             |
+| 数据页（statsSlide）               | ❌ 清晰即可        | 数据说话，标题准确描述即可 |
+| 列表页（listSlide、cardGridSlide） | ❌ 清晰即可        | 信息传递，多用步骤化表达   |
+| 流程页（flowSlide、timelineSlide） | ❌ 清晰即可        | 逻辑性内容，易读为上       |
+| 对比页（comparisonSlide）          | 🔶 视情况          | 如果有鲜明对比可以用       |
 
 ### 颜色语义（用于PPT配色）
 
@@ -118,6 +118,7 @@ bash /Users/MT/Documents/AIPro/Skills/ppt-generator/scripts/init-ppt.sh --slogan
 创建脚手架后，读取 `presentation.html`，在 slides 数组中添加你的章节幻灯片。使用 Vue 3 语法，每个幻灯片是一个包含 `layout` 和 `props` 的对象。
 
 **重要:**
+
 - 脚手架已包含封面（`coverSlide`），直接在封面和结束页之间添加新幻灯片。
 - 章节标题页用 `titleSlide`（乔布斯风），内容页根据类型选择合适布局。
 
@@ -133,6 +134,8 @@ npx vite --port 5173 --host
 ```
 
 然后用 `open` 打开浏览器: `open http://localhost:5173/presentation.html`
+
+**必须固定使用5173端口，如有冲突，则关闭之前5173进程，在5173启动该预览**
 
 **特性:**
 
@@ -158,50 +161,50 @@ npx vite --port 5173 --host
 
 ### 封面类（固定在第1页）
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
+| 布局           | 用途              | 参数                                                                                                                                                                                                                     |
+| -------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `coverSlide` | 封面（固定第1页） | `series` (系列名或大类，放置在中间橙色背景胶囊处，如"Antigravity"), `name` (核心主标题，巨大白色文字，如"问题汇总"), `tagline` (关键词标签，多个请用逗号分隔，如"网络环境,账号问题"), `icon` (必定要求配图的URL) |
 
 ### 标题/金句类
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
-| `titleSlide` | 章节标题页（乔布斯风） | `title`(传章节名称，显示为上方巨大白字), `subtitle`(传内容总结金句，显示为下方较小渐变字) |
-| `messageSlide` | 核心观点大字报 | `prefix`(前缀), `message`(正文), `highlight`(布尔值，是否渐变高亮) |
-| `questionSlide` | 提问页 | `question` |
-| `quoteSlide` | 引用/名言 | `quote`, `author`, `role` |
-| `endSlide` | 结束页 | `message` |
+| 布局              | 用途                   | 参数                                                                                          |
+| ----------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| `titleSlide`    | 章节标题页（乔布斯风） | `title`(传章节名称，显示为上方巨大白字), `subtitle`(传内容总结金句，显示为下方较小渐变字) |
+| `messageSlide`  | 核心观点大字报         | `prefix`(前缀), `message`(正文), `highlight`(布尔值，是否渐变高亮)                      |
+| `questionSlide` | 提问页                 | `question`                                                                                  |
+| `quoteSlide`    | 引用/名言              | `quote`, `author`, `role`                                                               |
+| `endSlide`      | 结束页                 | `message`                                                                                   |
 
 ### 数据/信息类
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
-| `statsSlide` | 数据统计(多指标) | `title`, `subtitle`, `items[]`(value/label/desc/gradientClass) |
-| `comparisonSlide` | 对比(左右) | `title`, `left`(label/items[]), `right`(label/items[]) |
+| 布局                | 用途             | 参数                                                                 |
+| ------------------- | ---------------- | -------------------------------------------------------------------- |
+| `statsSlide`      | 数据统计(多指标) | `title`, `subtitle`, `items[]`(value/label/desc/gradientClass) |
+| `comparisonSlide` | 对比(左右)       | `title`, `left`(label/items[]), `right`(label/items[])         |
 
 ### 列表/卡片类
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
-| `splitSlide` | 左右分栏(信息面板) | `badge`, `title`, `description`, `cards`(header/tag/items[]), `stats[]` |
-| `cardGridSlide` | 多特性卡片阵列 | `title`, `cards[]`(icon/title/desc/color/textColor) |
-| `listSlide` | 编号要点列表 | `title`, `items[]`(title/desc) |
+| 布局              | 用途               | 参数                                                                              |
+| ----------------- | ------------------ | --------------------------------------------------------------------------------- |
+| `splitSlide`    | 左右分栏(信息面板) | `badge`, `title`, `description`, `cards`(header/tag/items[]), `stats[]` |
+| `cardGridSlide` | 多特性卡片阵列     | `title`, `cards[]`(icon/title/desc/color/textColor)                           |
+| `listSlide`     | 编号要点列表       | `title`, `items[]`(title/desc)                                                |
 
 ### 流程/时间类
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
-| `flowSlide` | 流程图(横向步骤) | `title`, `steps[]`(title/desc) |
+| 布局              | 用途             | 参数                                     |
+| ----------------- | ---------------- | ---------------------------------------- |
+| `flowSlide`     | 流程图(横向步骤) | `title`, `steps[]`(title/desc)       |
 | `timelineSlide` | 时间线(锯齿交替) | `title`, `events[]`(date/title/desc) |
 
 ### 展示/媒体类
 
-| 布局 | 用途 | 参数 |
-|------|------|------|
-| `terminalSlide` | 终端/代码展示 | `title`, `lines[]`(prompt/text/color) |
-| `imageTextSlide` | 图文混排（截图与解决方案） | `[title, description, imageUrl, badge, solution]` |
-| `teamSlide` | 团队/人物卡片 | `title`, `members[]`(name/role/desc/initial/color) |
-| `gallerySlide` | 图片画廊(3列) | `title`, `items[]`(title/desc/imageUrl/color) |
+| 布局               | 用途                       | 参数                                                   |
+| ------------------ | -------------------------- | ------------------------------------------------------ |
+| `terminalSlide`  | 终端/代码展示              | `title`, `lines[]`(prompt/text/color)              |
+| `imageTextSlide` | 图文混排（截图与解决方案） | `[title, description, imageUrl, badge, solution]`    |
+| `teamSlide`      | 团队/人物卡片              | `title`, `members[]`(name/role/desc/initial/color) |
+| `gallerySlide`   | 图片画廊(3列)              | `title`, `items[]`(title/desc/imageUrl/color)      |
 
 ### 渐变文字可用 class
 

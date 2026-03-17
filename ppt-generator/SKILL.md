@@ -18,12 +18,11 @@ description: "使用 ultimate-dark 模板生成高质量 PPT（presentation.html
 
 ### 封面规则
 
-每次生成 PPT 固定前两页封面：
+每次生成 PPT 时固定第一页为封面：
 
 | 页面 | 布局 | 参数 |
 |------|------|------|
-| **第1页：竖屏封面** | `verticalCoverSlide` | `name`, `tagline`, `series` |
-| **第2页：正常封面** | `productSlide` | `name`, `tagline`, `series` |
+| **第1页：封面** | `coverSlide` | `name`, `tagline`, `series` |
 
 ## 乔布斯式标题生成规则
 
@@ -57,7 +56,7 @@ description: "使用 ultimate-dark 模板生成高质量 PPT（presentation.html
 
 | 页面类型 | 是否使用乔布斯模式 | 说明 |
 |---------|-------------|------|
-| 封面（verticalCoverSlide/productSlide） | ✅ 使用 | 第一印象需要吸引力 |
+| 封面（coverSlide） | ✅ 使用 | 第一印象需要吸引力 |
 | 章节标题（titleSlide） | ✅ 使用 | 表达章节核心观点或处理思路 |
 | 高亮金句（highlightSlide） | ✅ 使用 | 核心观点需要穿透力 |
 | 提问页（questionSlide） | ✅ 使用 | 引发思考的钩子 |
@@ -195,7 +194,7 @@ bash scripts/init-ppt.sh --slogan "标语" --title "标题" --series "系列名"
 
 **重要:**
 - 在修改 PPT 之前，必须先完成 Step 3（修正版讲稿），因为 PPT 的内容基于讲稿中的标题和标注。
-- 脚手架已包含前两页封面（`verticalCoverSlide` + `productSlide`），直接在封面和结束页之间添加新幻灯片。
+- 脚手架已包含封面（`coverSlide`），直接在封面和结束页之间添加新幻灯片。
 - 章节标题页用 `titleSlide`（乔布斯风），内容页根据类型选择合适布局。
 
 **选择合适的布局**: 根据内容类型从24种布局中选择最匹配的（参见下方 Slide Types 表），充分利用模板的丰富表现力。
@@ -234,12 +233,11 @@ npx vite --port 5173 --host
 { layout: '布局名', props: { /* 参数 */ } }
 ```
 
-### 封面类（前两页固定）
+### 封面类（固定在第1页）
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
-| `verticalCoverSlide` | 竖屏封面（第1页） | `name`, `tagline`, `series` |
-| `productSlide` | 正常封面（第2页） | `name`, `tagline`, `series` |
+| `coverSlide` | 封面（第1页） | `name`, `tagline`, `series` |
 
 ### 标题/金句类
 

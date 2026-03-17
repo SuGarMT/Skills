@@ -99,6 +99,10 @@ body {
     padding: 60px 100px;
     position: relative;
     overflow: hidden;
+    /* 增加极简高级感背景：微弱的对比色径向渐变，提升空间感 */
+    background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at bottom left, rgba(255, 85, 51, 0.04) 0%, transparent 50%),
+        var(--bg-deep);
 }
 
 /* ── 翻页控制器 ────────────────────────────────── */
@@ -360,11 +364,7 @@ body {
 /* ═══════════════════════════════════════════════
    3. highlightSlide - 重点高亮
    ═══════════════════════════════════════════════ */
-.type-highlight {
-    background:
-        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 60%),
-        var(--bg-deep);
-}
+
 
 .type-highlight .prefix {
     font-size: 16px;
@@ -411,11 +411,7 @@ body {
 /* ═══════════════════════════════════════════════
    5. questionSlide - 提问页
    ═══════════════════════════════════════════════ */
-.type-question {
-    background:
-        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
-        var(--bg-deep);
-}
+
 
 .question-icon {
     font-size: 64px;
@@ -444,11 +440,7 @@ body {
 /* ═══════════════════════════════════════════════
    6. endSlide - 结束页
    ═══════════════════════════════════════════════ */
-.type-end {
-    background:
-        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 60%),
-        var(--bg-deep);
-}
+
 
 .end-glow {
     position: absolute;
@@ -759,10 +751,6 @@ body {
    10. glassCardSlide - 玻璃卡片
    ═══════════════════════════════════════════════ */
 .type-glass-cards {
-    background:
-        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 70% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-        var(--bg-deep);
     padding: 60px 80px;
 }
 
@@ -1243,11 +1231,7 @@ body {
 /* ═══════════════════════════════════════════════
    16. quoteSlide - 引用/金句 [NEW]
    ═══════════════════════════════════════════════ */
-.type-quote {
-    background:
-        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(99, 102, 241, 0.06) 0%, transparent 60%),
-        var(--bg-deep);
-}
+
 
 .quote-mark {
     font-size: 120px;
@@ -1415,11 +1399,7 @@ body {
 /* ═══════════════════════════════════════════════
    19. numberSlide - 大数字展示 [NEW]
    ═══════════════════════════════════════════════ */
-.type-number {
-    background:
-        radial-gradient(ellipse 60% 50% at 50% 45%, rgba(99, 102, 241, 0.1) 0%, transparent 60%),
-        var(--bg-deep);
-}
+
 
 .number-display {
     display: flex;

@@ -5,7 +5,10 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>模板样例展示 — Ultimate Dark</title>
-      <link rel="stylesheet" href="resources/ppt-template/styles.css?v=2">
+      <script>
+            // Generate a truly unique version hash to bust all browser cached CSS
+            document.write('<link rel="stylesheet" href="resources/ppt-template/styles.css?v=' + Date.now() + '">');
+      </script>
       <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 
@@ -41,37 +44,32 @@
       </div>
 
       <script type="module">
-            import { layouts } from './resources/ppt-template/layouts.js?v=2';
+            // Bypass aggressive Chrome module caching using dynamic import with timestamp
+            const moduleCacheBuster = Date.now();
+            const { layouts } = await import('./resources/ppt-template/layouts.js?v=' + moduleCacheBuster);
 
-            // Exactly 22 layouts matching the latest layouts.js
+            // Exactly 0 layouts matching the latest layouts.js
+            // Exactly 0 layouts matching the latest layouts.js
             const slides = [
-                  {
-                        layout: 'verticalCoverSlide',
-                        props: {
-                              "series": "1. verticalCoverSlide - 9:16 竖版通用封面 [NEW]",
-                              "tagline": "设计好结构，执行力就是你的超能力",
-                              "name": "verticalCoverSlide"
-                        }
-                  },
                   {
                         layout: 'coverSlide',
                         props: {
-                              "series": "2. coverSlide - 横版封面 [Renamed from productSlide]",
+                              "series": "1. coverSlide - 横版封面",
                               "tagline": "设计好结构，执行力就是你的超能力",
-                              "name": "coverSlide"
+                              "name": "Ultimate Dark Theme"
                         }
                   },
                   {
                         layout: 'titleSlide',
                         props: {
-                              "subtitle": "3. titleSlide - 章节标题",
-                              "title": "titleSlide"
+                              "subtitle": "2. titleSlide - 章节标题",
+                              "title": "Module One"
                         }
                   },
                   {
                         layout: 'highlightSlide',
                         props: {
-                              "prefix": "4. highlightSlide - 重点高亮",
+                              "prefix": "3. highlightSlide - 重点高亮",
                               "highlight": "全局统一样式的暗色背景让焦点重归内容本身。",
                               "gradientClass": "gradient-text-accent"
                         }
@@ -79,20 +77,20 @@
                   {
                         layout: 'textSlide',
                         props: {
-                              "prefix": "5. textSlide - 主文本",
+                              "prefix": "4. textSlide - 主文本",
                               "mainText": "设计不再是杂乱无章的平铺，而是对信息的归类与提炼。"
                         }
                   },
                   {
                         layout: 'questionSlide',
                         props: {
-                              "question": "6. questionSlide - 提问页"
+                              "question": "5. questionSlide - 提问页"
                         }
                   },
                   {
                         layout: 'splitSlide',
                         props: {
-                              "badge": "7. splitSlide - 左右分栏",
+                              "badge": "6. splitSlide - 左右分栏",
                               "title": "极简与实用的分栏展示",
                               "description": "完美适应各类复杂的展示需求",
                               "stats": [
@@ -126,7 +124,7 @@
                   {
                         layout: 'statsSlide',
                         props: {
-                              "title": "8. statsSlide - 数据统计",
+                              "title": "7. statsSlide - 数据统计",
                               "subtitle": "核心指标",
                               "items": [
                                     {
@@ -146,7 +144,7 @@
                   {
                         layout: 'featureListSlide',
                         props: {
-                              "title": "9. featureListSlide - 功能特性列表",
+                              "title": "8. featureListSlide - 功能特性",
                               "features": [
                                     {
                                           "icon": "✦",
@@ -168,7 +166,7 @@
                   {
                         layout: 'glassCardSlide',
                         props: {
-                              "title": "10. glassCardSlide - 玻璃卡片",
+                              "title": "9. glassCardSlide - 玻璃卡片",
                               "items": [
                                     {
                                           "icon": "✦",
@@ -191,7 +189,7 @@
                   {
                         layout: 'terminalSlide',
                         props: {
-                              "title": "11. terminalSlide - 终端代码",
+                              "title": "10. terminalSlide - 终端代码",
                               "lines": [
                                     {
                                           "prompt": "$",
@@ -212,7 +210,7 @@
                   {
                         layout: 'definitionSlide',
                         props: {
-                              "term": "12. definitionSlide - 定义解释",
+                              "term": "11. definitionSlide - 术语定义",
                               "definition": "整个作品使用统一的对齐方式、颜色、页边距和页眉页脚，大幅降低读者的认知压力。",
                               "note": "不仅是在视觉上，逻辑上的组织更为重要。"
                         }
@@ -220,7 +218,7 @@
                   {
                         layout: 'comparisonSlide',
                         props: {
-                              "title": "13. comparisonSlide - 对比",
+                              "title": "12. comparisonSlide - 优劣对比",
                               "left": {
                                     "label": "旧排版",
                                     "items": [
@@ -256,7 +254,7 @@
                   {
                         layout: 'flowSlide',
                         props: {
-                              "title": "14. flowSlide - 流程图",
+                              "title": "13. flowSlide - 流程梳理",
                               "steps": [
                                     {
                                           "title": "提取核心",
@@ -276,7 +274,7 @@
                   {
                         layout: 'timelineSlide',
                         props: {
-                              "title": "15. timelineSlide - 时间线 [NEW]",
+                              "title": "14. timelineSlide - 发展时间线",
                               "events": [
                                     {
                                           "date": "V1.0",
@@ -294,15 +292,15 @@
                   {
                         layout: 'quoteSlide',
                         props: {
-                              "quote": "16. quoteSlide - 引用/金句 [NEW]",
-                              "author": "演示文稿名言"
+                              "quote": "15. quoteSlide - 引用/前言",
+                              "author": "Steve Jobs"
                         }
                   },
                   {
                         layout: 'imageTextSlide',
                         props: {
-                              "badge": "多图排版",
-                              "title": "17. imageTextSlide - 图文混排 [NEW]",
+                              "badge": "UI PRO MAX",
+                              "title": "16. imageTextSlide - 配图说明",
                               "description": "视觉冲击力比文字更有说服力。将配图结合图文展现。",
                               "imageUrl": "resources/ppt-template/pic.jpg"
                         }
@@ -310,7 +308,7 @@
                   {
                         layout: 'listSlide',
                         props: {
-                              "title": "18. listSlide - 要点列表 [NEW]",
+                              "title": "17. listSlide - 要点归纳",
                               "items": [
                                     {
                                           "title": "对齐",
@@ -332,18 +330,18 @@
                         props: {
                               "number": "10",
                               "unit": "x",
-                              "label": "19. numberSlide - 大数字展示 [NEW]",
+                              "label": "18. numberSlide - 关键数据",
                               "description": "使用全局 UI 和布局模板，制作速度成倍加快。"
                         }
                   },
                   {
                         layout: 'teamSlide',
                         props: {
-                              "title": "20. teamSlide - 团队/人物卡片 [NEW]",
+                              "title": "19. teamSlide - 成员介绍",
                               "members": [
                                     {
                                           "name": "MT",
-                                          "role": "演讲者",
+                                          "role": "Speaker",
                                           "desc": "方案设计与落地",
                                           "initial": "M",
                                           "color": "linear-gradient(135deg, #FF5533, #FF8866)"
@@ -354,7 +352,7 @@
                   {
                         layout: 'gallerySlide',
                         props: {
-                              "title": "21. gallerySlide - 图片画廊 [NEW]",
+                              "title": "20. gallerySlide - 灵感画廊",
                               "items": [
                                     {
                                           "title": "方案一",
@@ -377,7 +375,7 @@
                   {
                         layout: 'endSlide',
                         props: {
-                              "message": "22. endSlide - 结束页"
+                              "message": "21. endSlide - 结束页"
                         }
                   }
             ];

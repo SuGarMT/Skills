@@ -1,41 +1,7 @@
 const layouts = {
 
     // ══════════════════════════════════════════════
-    // 1. verticalCoverSlide - 9:16 竖版通用封面 [NEW]
-    // ══════════════════════════════════════════════
-    verticalCoverSlide: {
-        props: ['name', 'tagline', 'series'],
-        template: `
-            <div class="slide type-vertical-cover aurora-theme">
-                <div class="aurora-bg">
-                    <div class="aurora-orb orb-1"></div>
-                    <div class="aurora-orb orb-2"></div>
-                    <div class="aurora-orb orb-3"></div>
-                </div>
-                <!-- 移除毛玻璃，使用纯净的透明容器包裹 -->
-                <div class="aurora-content-wrapper">
-                    <div class="aurora-decor-line"></div>
-                    
-                    <div class="flat-header">
-                        <span class="aurora-badge" v-if="series">{{ series }}</span>
-                    </div>
-                    
-                    <div class="flat-main">
-                        <div class="aurora-title-wrapper">
-                            <h1 class="aurora-title" v-if="name">{{ name }}</h1>
-                        </div>
-                        <div class="aurora-tagline-wrapper">
-                            <div class="aurora-tagline" v-if="tagline">{{ tagline }}</div>
-                            <span class="aurora-extra-tag">PRO Edition</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-    },
-
-    // ══════════════════════════════════════════════
-    // 2. coverSlide - 横版封面 [Renamed from productSlide]
+    // 1. coverSlide - 横版封面 [Renamed from productSlide]
     // ══════════════════════════════════════════════
     coverSlide: {
         props: ['name', 'tagline', 'series'],
@@ -69,7 +35,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 3. titleSlide - 章节标题
+    // 2. titleSlide - 章节标题
     // ══════════════════════════════════════════════
     titleSlide: {
         props: ['title', 'subtitle'],
@@ -84,7 +50,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 4. highlightSlide - 重点高亮
+    // 3. highlightSlide - 重点高亮
     // ══════════════════════════════════════════════
     highlightSlide: {
         props: ['prefix', 'highlight', 'gradientClass'],
@@ -97,7 +63,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 5. textSlide - 主文本
+    // 4. textSlide - 主文本
     // ══════════════════════════════════════════════
     textSlide: {
         props: ['prefix', 'mainText'],
@@ -110,7 +76,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 6. questionSlide - 提问页
+    // 5. questionSlide - 提问页
     // ══════════════════════════════════════════════
     questionSlide: {
         props: ['question'],
@@ -123,7 +89,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 7. splitSlide - 左右分栏
+    // 6. splitSlide - 左右分栏
     // ══════════════════════════════════════════════
     splitSlide: {
         props: ['badge', 'title', 'description', 'cards', 'stats'],
@@ -164,7 +130,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 8. statsSlide - 数据统计
+    // 7. statsSlide - 数据统计
     // ══════════════════════════════════════════════
     statsSlide: {
         props: ['title', 'subtitle', 'items'],
@@ -186,7 +152,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 9. featureListSlide - 功能特性列表
+    // 8. featureListSlide - 功能特性列表
     // ══════════════════════════════════════════════
     featureListSlide: {
         props: ['title', 'features'],
@@ -205,7 +171,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 10. glassCardSlide - 玻璃卡片
+    // 9. glassCardSlide - 玻璃卡片
     // ══════════════════════════════════════════════
     glassCardSlide: {
         props: ['title', 'items'],
@@ -224,7 +190,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 11. terminalSlide - 终端代码
+    // 10. terminalSlide - 终端代码
     // ══════════════════════════════════════════════
     terminalSlide: {
         props: ['title', 'lines'],
@@ -249,7 +215,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 12. definitionSlide - 定义解释
+    // 11. definitionSlide - 定义解释
     // ══════════════════════════════════════════════
     definitionSlide: {
         props: ['term', 'definition', 'note'],
@@ -268,7 +234,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 13. comparisonSlide - 对比
+    // 12. comparisonSlide - 对比
     // ══════════════════════════════════════════════
     comparisonSlide: {
         props: ['title', 'left', 'right'],
@@ -307,7 +273,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 14. flowSlide - 流程图
+    // 13. flowSlide - 流程图
     // ══════════════════════════════════════════════
     flowSlide: {
         props: ['title', 'steps'],
@@ -329,7 +295,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 15. timelineSlide - 时间线 [NEW]
+    // 14. timelineSlide - 时间线 [NEW]
     // ══════════════════════════════════════════════
     timelineSlide: {
         props: ['title', 'events'],
@@ -352,7 +318,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 16. quoteSlide - 引用/金句 [NEW]
+    // 15. quoteSlide - 引用/金句 [NEW]
     // ══════════════════════════════════════════════
     quoteSlide: {
         props: ['quote', 'author', 'role'],
@@ -370,7 +336,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 17. imageTextSlide - 图文混排 [NEW]
+    // 16. imageTextSlide - 图文混排 [NEW]
     // ══════════════════════════════════════════════
     imageTextSlide: {
         props: ['title', 'description', 'imageUrl', 'badge'],
@@ -394,7 +360,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 18. listSlide - 要点列表 [NEW]
+    // 17. listSlide - 要点列表 [NEW]
     // ══════════════════════════════════════════════
     listSlide: {
         props: ['title', 'items'],
@@ -415,7 +381,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 19. numberSlide - 大数字展示 [NEW]
+    // 18. numberSlide - 大数字展示 [NEW]
     // ══════════════════════════════════════════════
     numberSlide: {
         props: ['number', 'unit', 'label', 'description'],
@@ -432,7 +398,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 20. teamSlide - 团队/人物卡片 [NEW]
+    // 19. teamSlide - 团队/人物卡片 [NEW]
     // ══════════════════════════════════════════════
     teamSlide: {
         props: ['title', 'members'],
@@ -454,7 +420,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 21. gallerySlide - 图片画廊 [NEW]
+    // 20. gallerySlide - 图片画廊 [NEW]
     // ══════════════════════════════════════════════
     gallerySlide: {
         props: ['title', 'items'],
@@ -474,7 +440,7 @@ const layouts = {
     },
 
     // ══════════════════════════════════════════════
-    // 22. endSlide - 结束页
+    // 21. endSlide - 结束页
     // ══════════════════════════════════════════════
     endSlide: {
         props: ['message'],

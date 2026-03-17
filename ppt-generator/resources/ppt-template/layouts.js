@@ -43,8 +43,8 @@ const layouts = {
         template: `
             <div class="slide type-title">
                 <div class="title-accent"></div>
-                <div class="subtitle" v-if="subtitle">{{ title }}</div>
-                <div class="title" v-if="title">{{ subtitle }}</div>
+                <div class="title" v-if="title">{{ title }}</div>
+                <div class="subtitle" v-if="subtitle" style="margin-top: 30px;">{{ subtitle }}</div>
                 <div class="title-underline"></div>
             </div>
         `

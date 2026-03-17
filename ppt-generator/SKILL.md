@@ -95,14 +95,17 @@ description: "根据用户提供的排版要求（大纲文件）或描述，使
 
 ### Step 3: 生成PPT脚手架
 
-使用 init-ppt.sh 创建PPT脚手架:
+使用 init-ppt.sh 创建PPT脚手架。**关键约束**：生成的所有文件必须一律放到用户提供的讲稿同目录（不要放在 skill 内部目录）。
 
 ```bash
-cd /Users/MT/Documents/AIPro/Skills/.agents/skills/ppt-generator
-bash scripts/init-ppt.sh --slogan "标语" --title "标题" --series "系列名"
+# 1. 首先切换到用户提供的讲稿大纲所在的具体目录
+cd "$(dirname "/用户的/讲稿绝对路径.md")"
+
+# 2. 绝对路径调用 ppt-generator 初始化脚本
+bash /Users/MT/Documents/AIPro/Skills/ppt-generator/scripts/init-ppt.sh --slogan "标语" --title "标题" --series "系列名"
 ```
 
-**注意:** 脚本会自动在当前目录下生成一个名为 `YYYYMMDD_标题` 的文件夹，也就是你的工作目录。
+**注意:** 脚本会自动在当前执行目录（即用户的讲稿同目录）下生成一个名为 `YYYYMMDD_标题` 的子文件夹，作为专属的工作目录。
 
 脚本会自动生成:
 
@@ -157,13 +160,13 @@ npx vite --port 5173 --host
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
-| `coverSlide` | 封面（第1页） | `name` (主标题), `tagline` (标签词), `series` (小标题/主题), `icon` (必定要求配图) |
+| `coverSlide` | 封面（固定第1页） | `series` (系列名或大类，放置在中间橙色背景胶囊处，如"Antigravity"), `name` (核心主标题，巨大白色文字，如"问题汇总"), `tagline` (关键词标签，多个请用逗号分隔，如"网络环境,账号问题"), `icon` (必定要求配图的URL) |
 
 ### 标题/金句类
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
-| `titleSlide` | 章节标题页（乔布斯风） | `subtitle`(巨大白字: 章节主标题), `title`(较小渐变字: 内容总结) |
+| `titleSlide` | 章节标题页（乔布斯风） | `title`(传章节名称，显示为上方巨大白字), `subtitle`(传内容总结金句，显示为下方较小渐变字) |
 | `messageSlide` | 核心观点大字报 | `prefix`(前缀), `message`(正文), `highlight`(布尔值，是否渐变高亮) |
 | `questionSlide` | 提问页 | `question` |
 | `quoteSlide` | 引用/名言 | `quote`, `author`, `role` |

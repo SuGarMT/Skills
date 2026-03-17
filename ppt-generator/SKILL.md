@@ -19,7 +19,7 @@ description: "根据用户提供的排版要求（大纲文件）或描述，使
 
 | 页面 | 布局 | 参数 |
 |------|------|------|
-| **第1页：横版封面** | `coverSlide` | `name`, `tagline`, `series` |
+| **第1页：横版封面** | `coverSlide` | `name` (核心主题), `series` (系列/大主题), `tagline` (关键字标签), `icon` (必备图标) |
 
 ## 乔布斯式标题生成规则
 
@@ -157,13 +157,13 @@ npx vite --port 5173 --host
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
-| `coverSlide` | 封面（第1页） | `name`, `tagline`, `series` |
+| `coverSlide` | 封面（第1页） | `name` (主标题), `tagline` (标签词), `series` (小标题/主题), `icon` (必定要求配图) |
 
 ### 标题/金句类
 
 | 布局 | 用途 | 参数 |
 |------|------|------|
-| `titleSlide` | 章节标题页（乔布斯风） | `title`, `subtitle` |
+| `titleSlide` | 章节标题页（乔布斯风） | `subtitle`(巨大白字: 章节主标题), `title`(较小渐变字: 内容总结) |
 | `messageSlide` | 核心观点大字报 | `prefix`(前缀), `message`(正文), `highlight`(布尔值，是否渐变高亮) |
 | `questionSlide` | 提问页 | `question` |
 | `quoteSlide` | 引用/名言 | `quote`, `author`, `role` |

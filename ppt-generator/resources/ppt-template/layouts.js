@@ -14,8 +14,7 @@ const layouts = {
                 </div>
                 <!-- 移除毛玻璃，使用纯净的透明容器包裹 -->
                 <div class="aurora-content-wrapper">
-                    <img v-if="icon" :src="icon" class="cover-hero-icon" alt="Cover Icon" />
-                    <div class="aurora-decor-line"></div>
+                    <img v-if="icon" :src="icon" class="cover-hero-icon" alt="Cover Icon" style="border-radius: 20px; object-fit: cover; margin-bottom: 24px;" />
                     
                     <div class="flat-header">
                         <span class="aurora-badge" v-if="series">{{ series }}</span>
@@ -25,9 +24,10 @@ const layouts = {
                         <div class="aurora-title-wrapper">
                             <h1 class="aurora-title" v-if="name">{{ name }}</h1>
                         </div>
-                        <div class="aurora-tagline-wrapper">
-                            <div class="aurora-tagline" v-if="tagline">{{ tagline }}</div>
-                            <span class="aurora-extra-tag">PRO Edition</span>
+                        <div class="aurora-tagline-wrapper" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                            <span class="aurora-extra-tag" v-if="tagline" v-for="(tag, index) in tagline.split(/[、,，|]/)" :key="index">
+                                {{ tag.trim() }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -43,8 +43,8 @@ const layouts = {
         template: `
             <div class="slide type-title">
                 <div class="title-accent"></div>
-                <div class="subtitle" v-if="subtitle">{{ subtitle }}</div>
-                <div class="title" v-if="title">{{ title }}</div>
+                <div class="subtitle" v-if="subtitle">{{ title }}</div>
+                <div class="title" v-if="title">{{ subtitle }}</div>
                 <div class="title-underline"></div>
             </div>
         `

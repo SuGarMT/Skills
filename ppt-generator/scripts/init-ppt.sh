@@ -65,7 +65,7 @@ generate_presentation() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 HEREDOC_HEAD
 
-    echo "    <title>${TITLE} — Ultimate Dark</title>" >> "$OUTPUT/$filename"
+    echo "    <title>${TITLE}</title>" >> "$OUTPUT/$filename"
 
     cat >> "$OUTPUT/$filename" << 'HEREDOC_MID'
     <link rel="stylesheet" href="styles.css">

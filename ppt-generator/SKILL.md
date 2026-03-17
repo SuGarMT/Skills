@@ -133,9 +133,9 @@ cd 输出目录
 npx vite --port 5173 --host
 ```
 
-然后用 `open` 打开浏览器: `open http://localhost:5173/presentation.html`
+然后用打开浏览器: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --kiosk "http://localhost:5173/presentation.html" --user-data-dir=/tmp/chrome_kiosk_temp
 
-**必须固定使用5173端口，如有冲突，则关闭之前5173进程，在5173启动该预览**
+**必须用以上指定的指令打开预览**
 
 **特性:**
 

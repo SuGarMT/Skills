@@ -1,5 +1,5 @@
 ---
-name: dbhub-util
+name: dbhub-util-claude
 description: Use when user provides JDBC URL, Spring Boot datasource config, DSN, or database key-value pairs and wants Claude Code to configure project-local DBHub files, generate dbhub.toml, create or update a project .mcp.json, or set up a project database MCP with dbhub.
 ---
 # MT DBHub Util

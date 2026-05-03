@@ -1,8 +1,7 @@
 ---
-name: mt-dbhub-util
+name: dbhub-util
 description: Use when user provides JDBC URL, Spring Boot datasource config, DSN, or database key-value pairs and wants Claude Code to configure project-local DBHub files, generate dbhub.toml, create or update a project .mcp.json, or set up a project database MCP with dbhub.
 ---
-
 # MT DBHub Util
 
 ## Overview
@@ -26,6 +25,7 @@ jdbc:mysql://host:port/database?params
 ```
 
 规则：
+
 - 忽略 `?` 后的参数
 - 从 `jdbc:mysql`、`jdbc:postgresql`、`jdbc:oracle:thin:@`、`jdbc:sqlserver` 推断 `type`
 
@@ -64,11 +64,13 @@ type: mysql
 ## Resolution Priority
 
 字段优先级：
+
 - 显式 key-value 字段
 - Spring Boot 独立字段
 - JDBC / DSN 推断字段
 
 冲突处理：
+
 - 如果显式 `type`、`driver-class-name`、JDBC 前缀之间互相冲突，不要猜测，不要落盘，先指出冲突并请求用户确认
 - 如果输入格式无法可靠解析，不要猜测，不要写文件，先请求用户补充或确认
 
@@ -81,23 +83,23 @@ type: mysql
 
 ## Type Inference
 
-| 来源 | 推断类型 |
-| --- | --- |
-| `jdbc:mysql://` | `mysql` |
-| `jdbc:postgresql://` | `postgresql` |
-| `jdbc:oracle:thin:@` | `oracle` |
-| `jdbc:sqlserver://` | `sqlserver` |
-| `com.mysql.cj.jdbc.Driver` | `mysql` |
-| `org.postgresql.Driver` | `postgresql` |
+| 来源                         | 推断类型       |
+| ---------------------------- | -------------- |
+| `jdbc:mysql://`            | `mysql`      |
+| `jdbc:postgresql://`       | `postgresql` |
+| `jdbc:oracle:thin:@`       | `oracle`     |
+| `jdbc:sqlserver://`        | `sqlserver`  |
+| `com.mysql.cj.jdbc.Driver` | `mysql`      |
+| `org.postgresql.Driver`    | `postgresql` |
 
 ## Default Ports
 
-| type | 默认端口 |
-| --- | --- |
-| `mysql` | `3306` |
+| type           | 默认端口 |
+| -------------- | -------- |
+| `mysql`      | `3306` |
 | `postgresql` | `5432` |
-| `sqlserver` | `1433` |
-| `oracle` | `1521` |
+| `sqlserver`  | `1433` |
+| `oracle`     | `1521` |
 
 ## Required Outputs
 
@@ -118,6 +120,7 @@ read_only = false
 ```
 
 最小必填字段：
+
 - `id`
 - `type`
 - `host`
@@ -128,10 +131,12 @@ read_only = false
 - `read_only`
 
 默认规则：
+
 - 如果用户未指定 `read_only`，默认写入 `false`
 - 只有当用户明确要求只读连接时，才写入 `true`
 
 更新规则：
+
 - 如果 `dbhub.toml` 不存在，则创建新文件
 - 如果已存在且已有相同 `id` 的 `[[sources]]`，更新该 source
 - 如果已存在但没有相同 `id` 的 `[[sources]]`，追加新的 source
@@ -158,6 +163,7 @@ read_only = false
 ```
 
 要求：
+
 - 服务名必须是 `dbhub`
 - `--config` 必须显式指向当前项目的绝对路径
 - 如果 `.mcp.json` 已存在，保留其他 MCP，仅补充或更新 `dbhub`
@@ -176,13 +182,13 @@ read_only = false
 
 ## Common Mistakes
 
-| 错误 | 正确 |
-| --- | --- |
-| `@anthropic/dbhub` | `@bytebase/dbhub@latest` |
-| `[databases.xxx]` | `[[sources]]` |
-| `username` | `user` |
-| `driver` | `type` |
-| `/Users/MT/.agents/dbhub.toml` | `<project>/.claude/dbhub.toml` |
+| 错误                                  | 正确                                   |
+| ------------------------------------- | -------------------------------------- |
+| `@anthropic/dbhub`                  | `@bytebase/dbhub@latest`             |
+| `[databases.xxx]`                   | `[[sources]]`                        |
+| `username`                          | `user`                               |
+| `driver`                            | `type`                               |
+| `/Users/MT/.agents/dbhub.toml`      | `<project>/.claude/dbhub.toml`       |
 | `.mcp.json` 里服务名写成 `dbutil` | `.mcp.json` 里服务名固定为 `dbhub` |
 
 ## Never Do

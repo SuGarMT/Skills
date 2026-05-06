@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Dark PPT Components</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: #050508;
+            color: #fff;
+         overflow: hidden !important; }
+        
+        .slide {
+            
+            width: 100vw;
+            height: 100vh;
+            /* Extra styles to ensure full page snap */
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+   Ultimate Dark — 统一暗色 PPT 模板样式
+   字体: Inter + Noto Sans SC（中英文兼容）
+   风格: 高级暗色系，紫蓝主色调，兼容多种口播稿风格
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 核心色板 */
+    --bg-deep: #050508;
+    --bg-surface: #0a0a10;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+
+    --accent-1: #FF5533;
+    /* Orange/Red */
+    --accent-2: #00E5FF;
+    /* Cyan */
+    --accent-3: #FF5533;
+    /* Secondary Orange */
+    --accent-4: #FAFF00;
+    /* Yellow */
+
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.45);
+
+    --border: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(0, 229, 255, 0.3);
+
+    --glow-accent: rgba(255, 85, 51, 0.3);
+    --glow-cyan: rgba(0, 229, 255, 0.3);
+
+    /* 字体 */
+    --font-heading: 'Inter', 'Noto Sans SC', sans-serif;
+    --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* 圆角 */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+}
+
+/* ── 全局容器 ──────────────────────────────────── */
+body {
+    background: var(--bg-deep);
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.presentation-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--bg-deep);
+}
+
+/* ── 翻页转场 ──────────────────────────────────── */
+.fade-enter-active {
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+.fade-leave-active {
+    transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.fade-enter-from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+}
+
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(-8px) scale(1.01);
+}
+
+/* ── Slide 通用 ────────────────────────────────── */
+.slide {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 100px;
+    position: relative;
+    overflow: hidden;
+    /* 增加极简高级感背景：微弱的对比色径向渐变，提升空间感 */
+    background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at bottom left, rgba(255, 85, 51, 0.04) 0%, transparent 50%),
+        var(--bg-deep);
+}
+
+/* ── 翻页控制器 ────────────────────────────────── */
+.nav-controls {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(16px);
+    padding: 8px 20px;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    user-select: none;
+}
+
+.nav-controls button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+}
+
+.nav-controls button:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── 渐变文字 ──────────────────────────────────── */
+.gradient-text-accent {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-text-cyan {
+    background: linear-gradient(135deg, var(--accent-3), var(--accent-1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-text-warm {
+    background: linear-gradient(135deg, var(--accent-4), #ef4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* ═══════════════════════════════════════════════
+   1. coverSlide - 横版封面 (Minimal Dark Neon)
+   ═══════════════════════════════════════════════ */
+.type-cover {
+    background: var(--bg-deep);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================================================================
+   AURORA THEME (For Covers)
+   ========================================================================= */
+
+.aurora-theme {
+    background: #0a0a12;
+    overflow: hidden;
+}
+
+.aurora-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    filter: blur(100px);
+    opacity: 0.8;
+}
+
+.aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatOrb 15s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle, #ff5533 0%, transparent 70%);
+    top: -20%;
+    left: -20%;
+}
+
+.orb-2 {
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(circle, #00e5ff 0%, transparent 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 70vw;
+    height: 70vh;
+    background: radial-gradient(circle, #faff00 0%, transparent 60%);
+    top: 30%;
+    left: 40%;
+    animation-delay: -10s;
+    opacity: 0.5;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(100px, 50px) scale(1.1);
+    }
+}
+
+.aurora-content-wrapper {
+    position: relative;
+    z-index: 10;
+    /* Remove glass blur */
+    background: transparent;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 85%;
+    width: 100%;
+}
+
+/* Decorative Extra Tags/Blocks to enrich colors */
+.cover-hero-icon {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    animation: float 6s ease-in-out infinite;
+}
+
+.aurora-decor-line {
+    width: 60px;
+    height: 6px;
+    background: #00e5ff;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.aurora-extra-tag {
+    color: #0a0a12;
+    background: #faff00;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 16px;
+    box-shadow: 0 4px 10px rgba(250, 255, 0, 0.4);
+}
+
+.aurora-badge {
+    color: #fff;
+    background: linear-gradient(90deg, #ff5533, #ff8866);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 24px;
+    letter-spacing: 2px;
+    display: inline-block;
+    border-radius: 50px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(255, 85, 51, 0.3);
+}
+
+/* 📱 移动端屏幕适配 */
+@media screen and (max-width: 768px) {
+
+    /* 覆盖底层的强制宽高缩放机制 */
+    .slide {
+        width: 100vw !important;
+        height: 100vh !important;
+        position: relative !important;
+        transform: none !important;
+        overflow-y: auto !important;
+        /* 允许滚动 */
+        padding: 40px 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 主容器允许压缩 */
+    .aurora-content-wrapper {
+        padding: 0 !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 缩小顶部 Icon */
+    .cover-hero-icon {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 16px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* 系列 Badge 缩小 */
+    .aurora-badge {
+        font-size: 12px;
+        padding: 4px 16px;
+        margin-bottom: 16px;
+    }
+
+    .flat-main {
+        gap: 12px !important;
+    }
+
+    /* 优化大标题字体，允许自动换行，禁止强制单字换行竖排 */
+    .aurora-title {
+        font-size: 48px !important;
+        word-break: normal !important;
+        white-space: normal !important;
+        max-width: 100%;
+        line-height: 1.2 !important;
+    }
+
+    /* Tag 字体与间距缩小 */
+    .aurora-extra-tag {
+        font-size: 14px !important;
+        padding: 6px 14px !important;
+        margin: 4px !important;
+    }
+
+    /* 第二页章节大标题缩小 */
+    .type-title .title {
+        font-size: 40px !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+    }
+
+    .type-title .subtitle {
+        font-size: 20px !important;
+        margin-top: 16px !important;
+        white-space: normal !important;
+        line-height: 1.4 !important;
+    }
+}
+
+.aurora-title-wrapper {
+    margin-bottom: 24px;
+}
+
+.aurora-title {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #ffffff;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    white-space: normal;
+    word-break: break-word;
+}
+
+.aurora-tagline-wrapper {
+    margin-top: 16px;
+}
+
+.aurora-tagline {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.aurora-btn {
+    display: none;
+    /* Can be enabled if user wants a CTA */
+}
+
+
+
+/* ═══════════════════════════════════════════════
+   2. titleSlide - 章节标题
+   ═══════════════════════════════════════════════ */
+.type-title .title-accent {
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.type-title .subtitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent-1);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.type-title .title {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 800px;
+    text-align: center;
+}
+
+.type-title .title-underline {
+    width: 80px;
+    height: 2px;
+    background: var(--border-accent);
+    margin-top: 24px;
+    border-radius: 1px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   3. messageSlide - 核心观点
+   ═══════════════════════════════════════════════ */
+.type-message {
+    padding: 60px 100px;
+}
+
+.type-message .prefix {
+    font-size: 16px;
+    color: var(--accent-1);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.type-message .message {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 900px;
+    color: var(--text-primary);
+}
+
+.type-message .message.gradient-text-accent {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* ═══════════════════════════════════════════════
+   5. questionSlide - 提问页
+   ═══════════════════════════════════════════════ */
+
+
+.question-icon {
+    font-size: 64px;
+    font-weight: 800;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--border-accent);
+    color: var(--accent-1);
+    margin-bottom: 32px;
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.type-question .question {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.4;
+    max-width: 750px;
+    text-align: center;
+}
+
+
+/* ═══════════════════════════════════════════════
+   6. endSlide - 结束页
+   ═══════════════════════════════════════════════ */
+
+
+.end-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12), transparent 70%);
+    animation: pulse-glow 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.end-icon {
+    font-size: 28px;
+    color: var(--accent-1);
+    margin-bottom: 28px;
+    opacity: 0.6;
+}
+
+.type-end .message {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   7. splitSlide - 左右分栏
+   ═══════════════════════════════════════════════ */
+.type-split {
+    flex-direction: row;
+    padding: 60px 80px;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-left {
+    flex: 1;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-1);
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid var(--border-accent);
+    padding: 6px 14px;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    width: fit-content;
+    letter-spacing: 0.5px;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-1);
+}
+
+.split-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.split-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 22px;
+    min-width: 100px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+}
+
+.split-right {
+    flex: 1;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+}
+
+.info-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    width: 100%;
+}
+
+.panel-header {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-tag {
+    font-size: 11px;
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--accent-1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.panel-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.panel-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.item-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.item-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════
+   8. statsSlide - 数据统计
+   ═══════════════════════════════════════════════ */
+.type-stats .stats-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.type-stats .subtitle {
+    font-size: 13px;
+    color: var(--accent-1);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.type-stats .title {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stats-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    min-width: 180px;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+.stats-card:hover {
+    border-color: var(--border-accent);
+}
+
+.stats-card-value {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stats-card-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.stats-card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════
+   7. cardGridSlide - 网格卡片
+   ═══════════════════════════════════════════════ */
+.type-card-grid {
+    padding: 60px 80px;
+}
+
+.grid-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.grid-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.card-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+
+/* ═══════════════════════════════════════════════
+   11. terminalSlide - 终端代码
+   ═══════════════════════════════════════════════ */
+.type-terminal {
+    padding: 60px 100px;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 750px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--border);
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dot.red {
+    background: #ff5f57;
+}
+
+.terminal-dot.yellow {
+    background: #febc2e;
+}
+
+.terminal-dot.green {
+    background: #28c840;
+}
+
+.terminal-title {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.terminal-body {
+    padding: 20px 24px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.terminal-line {
+    display: flex;
+    gap: 8px;
+}
+
+.line-prompt {
+    color: var(--accent-3);
+    flex-shrink: 0;
+}
+
+.line-text {
+    color: var(--text-primary);
+}
+
+.line-text.green {
+    color: #4ade80;
+}
+
+.line-text.yellow {
+    color: #facc15;
+}
+
+.line-text.red {
+    color: #f87171;
+}
+
+.line-text.cyan {
+    color: #22d3ee;
+}
+
+.line-text.dim {
+    color: var(--text-muted);
+}
+
+
+
+
+
+/* ═══════════════════════════════════════════════
+   13. comparisonSlide - 对比
+   ═══════════════════════════════════════════════ */
+.type-comparison {
+    padding: 60px 80px;
+}
+
+.comp-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.comp-grid {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+    max-width: 900px;
+    width: 100%;
+}
+
+.comp-col {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+}
+
+.comp-left {
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.comp-right {
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+.comp-col-header {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.comp-left .comp-col-header {
+    color: #f87171;
+}
+
+.comp-right .comp-col-header {
+    color: #4ade80;
+}
+
+.comp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.comp-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.comp-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+}
+
+.comp-icon-right {
+    background: rgba(34, 197, 94, 0.12);
+    color: #4ade80;
+}
+
+.comp-item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comp-item-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.comp-vs {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-muted);
+    padding: 0 8px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   14. flowSlide - 流程图
+   ═══════════════════════════════════════════════ */
+.type-flow {
+    padding: 60px 80px;
+}
+
+.flow-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.flow-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flow-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    width: 180px;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+.flow-step:hover {
+    border-color: var(--border-accent);
+}
+
+.flow-num {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--accent-1);
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+}
+
+.flow-step-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.flow-step-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: var(--text-muted);
+    padding-top: 30px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   15. timelineSlide - 时间线 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-timeline {
+    padding: 60px 100px;
+    align-items: flex-start;
+}
+
+.timeline-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    width: 100%;
+    text-align: center;
+}
+
+.timeline-track {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent-1), var(--border), transparent);
+    transform: translateX(-50%);
+}
+
+.timeline-event {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+}
+
+.timeline-event.even {
+    justify-content: flex-start;
+    padding-right: 55%;
+}
+
+.timeline-event.odd {
+    justify-content: flex-end;
+    padding-left: 55%;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    border: 3px solid var(--bg-deep);
+    box-shadow: 0 0 0 2px var(--accent-1);
+    z-index: 2;
+}
+
+.timeline-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    width: 100%;
+}
+
+.timeline-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-1);
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+}
+
+.timeline-event-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.timeline-event-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════
+   16. quoteSlide - 引用/金句 [NEW]
+   ═══════════════════════════════════════════════ */
+
+
+.quote-mark {
+    font-size: 120px;
+    font-weight: 900;
+    line-height: 0.6;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+    margin-bottom: 8px;
+    font-family: Georgia, serif;
+}
+
+.quote-text {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.6;
+    max-width: 750px;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-primary);
+}
+
+.quote-attribution {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 32px;
+    font-size: 16px;
+}
+
+.quote-dash {
+    color: var(--accent-1);
+    font-weight: 300;
+}
+
+.quote-author {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quote-role {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+
+/* ═══════════════════════════════════════════════
+   17. imageTextSlide - 图文混排 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-image-text {
+    flex-direction: row;
+    padding: 60px 80px;
+    gap: 60px;
+    align-items: center;
+}
+
+.img-text-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screenshot-img {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    object-fit: contain;
+}
+
+.img-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.img-text-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.img-text-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 500px;
+}
+
+.solution-box {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: rgba(34, 197, 94, 0.1);
+    border-left: 4px solid #4ade80;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.solution-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4ade80;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.solution-text {
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+
+/* ═══════════════════════════════════════════════
+   18. listSlide - 要点列表 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-list {
+    padding: 60px 120px;
+    align-items: flex-start;
+}
+
+.list-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: all 0.3s;
+}
+
+.list-item:hover {
+    border-color: var(--border-accent);
+    transform: translateX(4px);
+}
+
+.list-num {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-1);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.list-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.list-item-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+
+
+
+/* ═══════════════════════════════════════════════
+   22. conflictCoverSlide & verticalConflictSlide 
+       - 矛盾冲突极简高反差封面 (Neo-Brutalism VS style)
+   ═══════════════════════════════════════════════ */
+
+.type-conflict,
+.type-vertical-conflict {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+
+/* Horizontal 16:9 Version */
+.type-conflict {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    /* 覆盖 .slide 的 center */
+}
+
+.type-conflict .conflict-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 80px;
+    position: relative;
+    height: 100%;
+    /* 确保撑满高度 */
+}
+
+.type-conflict .conflict-left {
+    background: #00E5FF;
+    color: #000;
+    justify-content: flex-end;
+    padding-right: 180px;
+    /* Greatly increased padding to avoid clipped text caused by negative margin on right side */
+}
+
+.type-conflict .conflict-left .conflict-content {
+    max-width: 600px;
+    scroll-padding-right: 0;
+}
+
+.type-conflict .conflict-right {
+    background: #FF0055;
+    /* Neon Pink to create a high-contrast Neo-Brutalism conflict */
+    color: #fff;
+    justify-content: flex-start;
+    clip-path: polygon(150px 0, 100% 0, 100% 100%, 0% 100%);
+    margin-left: -160px;
+    /* overlap more than the clip to prevent subpixel black gaps */
+    padding-left: 240px;
+}
+
+/* Vertical 9:16 Version */
+.type-vertical-conflict {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    /* Dark backdrop for the presentation area */
+}
+
+.mobile-wrapper {
+    aspect-ratio: 9/16;
+    height: 100%;
+    /* Force it to take full height of the slide */
+    background: #000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+    /* Separation from background */
+    align-items: stretch;
+}
+
+.mobile-wrapper .conflict-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+}
+
+.mobile-wrapper .conflict-top {
+    background: #00E5FF;
+    color: #000;
+    align-items: flex-end;
+    padding-bottom: 120px;
+}
+
+.mobile-wrapper .conflict-bottom {
+    background: #FF0055;
+    color: #fff;
+    align-items: flex-start;
+    clip-path: polygon(0 100px, 100% 0, 100% 100%, 0 100%);
+    margin-top: -120px;
+    /* overlap up more than clip depth to absolutely hide background gap */
+    padding-top: 160px;
+}
+
+/* Typography & Badges shared */
+.conflict-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.alignment-right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.alignment-left {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.type-conflict .conflict-headline {
+    font-size: 85px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 0;
+}
+
+.type-vertical-conflict .conflict-headline {
+    font-size: 65px;
+    /* Scaled down for mobile vertical */
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 0;
+}
+
+.conflict-sub {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--bg-deep);
+    background: var(--accent-3);
+    padding: 10px 20px;
+    margin: 0;
+    display: inline-block;
+}
+
+/* Dark theme overrides for contrast */
+.conflict-right .conflict-sub,
+.conflict-bottom .conflict-sub {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+}
+
+.type-vertical-conflict .conflict-sub {
+    font-size: 20px;
+    padding: 8px 16px;
+}
+
+.conflict-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    background: #FAFF00;
+    /* Revert badge to brutalist yellow since accent-4 isn't popping enough against Magenta */
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 60px;
+    font-weight: 900;
+    padding: 10px 30px;
+    border: 8px solid #000;
+    z-index: 10;
+    text-transform: uppercase;
+    box-shadow: 15px 15px 0 #000;
+    /* Brutalist sharp shadow */
+}
+
+.type-vertical-conflict .conflict-badge {
+    font-size: 45px;
+    border: 6px solid #000;
+    padding: 5px 20px;
+}
+
+.number-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 500px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+
+/* ═══════════════════════════════════════════════
+   20. teamSlide - 团队/人物 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-team {
+    padding: 60px 80px;
+}
+
+.team-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.team-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.team-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    text-align: center;
+    min-width: 180px;
+    max-width: 220px;
+    transition: all 0.3s;
+}
+
+.team-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-3px);
+}
+
+.team-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin: 0 auto 16px;
+}
+
+.team-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.team-role {
+    font-size: 13px;
+    color: var(--accent-1);
+    margin-bottom: 10px;
+}
+
+.team-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════
+   21. gallerySlide - 画廊 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-gallery {
+    padding: 60px 80px;
+}
+
+.gallery-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 36px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.gallery-item {
+    aspect-ratio: 16/10;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    border-color: var(--border-accent);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+.gallery-item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.gallery-item-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   24. verticalCoverSlide - 9:16 竖版通用封面 [NEW]
+   ═══════════════════════════════════════════════ */
+.type-vertical-cover {
+    padding: 0;
+    overflow: hidden;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.type-vertical-cover .mobile-wrapper {
+    position: relative;
+    background: #00E5FF;
+    overflow: hidden;
+}
+
+.vc-bg-shape {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 55%;
+    background: #FF0055;
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+    z-index: 0;
+}
+
+.vc-bg-circle {
+    position: absolute;
+    top: 15%;
+    right: -10%;
+    width: 350px;
+    height: 350px;
+    background: #FAFF00;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.vc-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.vc-header {
+    margin-bottom: auto;
+}
+
+.vc-main {
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.vc-title {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #000000;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    background: #FFFFFF;
+    display: inline;
+    padding: 10px 20px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.vc-tagline {
+    font-size: 24px;
+    color: #FFFFFF;
+    background: #000000;
+    display: inline-block;
+    padding: 14px 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    max-width: 100%;
+}
+
+.vc-footer {
+    margin-top: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   Global Header & Footer 
+   ═══════════════════════════════════════════════ */
+.global-header {
+    position: fixed;
+    top: 40px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    font-family: var(--font-body);
+}
+
+.gh-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.gh-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gh-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    padding: 4px 14px 4px 4px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.gh-right:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.gh-avatar-wrapper {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gh-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gh-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    letter-spacing: 0.5px;
+}
+
+.global-footer {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    pointer-events: none;
+    /* So it doesn't block clicks */
+}
+
+.page-number-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    backdrop-filter: blur(10px);
+}
+        
+        /* Progress Bar & Nav */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF5533, #00E5FF);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Global Header -->
+    <div class="global-header">
+        <div class="gh-left">
+            <span class="gh-title">Ultimate Dark Template</span>
+        </div>
+        <div class="gh-right">
+            <div class="gh-avatar-wrapper">
+                <img src="data:image/jpeg;base64,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" alt="Avatar" class="gh-avatar">
+            </div>
+            <span class="gh-author">MT</span>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <div class="global-footer">
+        <div class="page-number-pill">
+            <span id="currentPage">01</span> / <span id="totalPages">17</span>
+        </div>
+    </div>
+
+
+    <!-- 1. coverSlide -->
+    <div id="slides-wrapper" style="transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1); height: 100vh; width: 100vw;">
+<section class="slide type-cover aurora-theme">
+        <div class="aurora-bg">
+            <div class="aurora-orb orb-1"></div>
+            <div class="aurora-orb orb-2"></div>
+            <div class="aurora-orb orb-3"></div>
+        </div>
+        <div class="aurora-content-wrapper">
+            <div class="flat-header">
+                <span class="aurora-badge">Antigravity Series</span>
+            </div>
+            <div class="flat-main">
+                <div class="aurora-title-wrapper">
+                    <h1 class="aurora-title">Ultimate Dark Template</h1>
+                </div>
+                <div class="aurora-tagline-wrapper" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <span class="aurora-extra-tag">Component Showcase</span>
+                    <span class="aurora-extra-tag">Single File HTML</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. titleSlide -->
+    <section class="slide type-title">
+        <div class="title-accent"></div>
+        <div class="title">Section 1: The Core</div>
+        <div class="subtitle" style="margin-top: 30px;">乔布斯式一句话核心观点</div>
+        <div class="title-underline"></div>
+    </section>
+
+    <!-- 3. messageSlide -->
+    <section class="slide type-message">
+        <div class="prefix">核心观点</div>
+        <div class="message gradient-text-accent">AI不是代替你，而是放大你。</div>
+    </section>
+
+    <!-- 4. questionSlide -->
+    <section class="slide type-question">
+        <div class="question-icon">?</div>
+        <div class="question">如何让PPT真正做到零依赖？</div>
+    </section>
+
+    <!-- 5. splitSlide -->
+    <section class="slide type-split">
+        <div class="split-left">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                架构分析
+            </div>
+            <div class="split-title">分离式设计的优势</div>
+            <div class="split-desc">左边陈述观点，右侧陈列核心特性的卡片。使得版面平衡且信息密度高。</div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">前端兼容</div>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="info-panel">
+                <div class="panel-header">核心优势
+                    <span class="panel-tag">V2.0</span>
+                </div>
+                <div class="panel-items">
+                    <div class="panel-item">
+                        <span class="item-icon" style="background: rgba(99,102,241,0.15); color: #818cf8">⚡</span>
+                        <div class="item-content">
+                            <div class="item-title">极致加载速度</div>
+                            <div class="item-desc">单文件输出，0外部网络请求。</div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <span class="item-icon" style="background: rgba(16,185,129,0.15); color: #34d399">✓</span>
+                        <div class="item-content">
+                            <div class="item-title">原生渲染</div>
+                            <div class="item-desc">浏览器即可直接开启全屏演示。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. statsSlide -->
+    <section class="slide type-stats">
+        <div class="stats-header">
+            <div class="subtitle">By the numbers</div>
+            <div class="title">项目里程碑数据</div>
+        </div>
+        <div class="stats-grid">
+            <div class="stats-card">
+                <div class="stats-card-value gradient-text-accent">17</div>
+                <div class="stats-card-label">组件数量</div>
+                <div class="stats-card-desc">覆盖绝大多数PPT场景</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-card-value gradient-text-cyan">0</div>
+                <div class="stats-card-label">构建依赖</div>
+                <div class="stats-card-desc">无需Node/NPM</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-card-value gradient-text-warm">100%</div>
+                <div class="stats-card-label">掌控力</div>
+                <div class="stats-card-desc">代码即设计</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. cardGridSlide -->
+    <section class="slide type-card-grid">
+        <div class="grid-title">特性矩阵</div>
+        <div class="card-grid">
+            <div class="grid-card">
+                <div class="card-icon" style="background: rgba(99,102,241,0.15); color: #818cf8">🎯</div>
+                <div class="card-content">
+                    <div class="card-title">精准对齐</div>
+                    <div class="card-desc">100vh绝对适配。</div>
+                </div>
+            </div>
+            <div class="grid-card">
+                <div class="card-icon" style="background: rgba(236,72,153,0.15); color: #f472b6">🎨</div>
+                <div class="card-content">
+                    <div class="card-title">极夜主题</div>
+                    <div class="card-desc">Aurora高级暗色风格。</div>
+                </div>
+            </div>
+            <div class="grid-card">
+                <div class="card-icon" style="background: rgba(16,185,129,0.15); color: #34d399">⌨️</div>
+                <div class="card-content">
+                    <div class="card-title">键盘交互</div>
+                    <div class="card-desc">原生上下左右翻页。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. terminalSlide -->
+    <section class="slide type-terminal">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">zsh - 初始化演示</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="line-prompt">❯</span>
+                    <span class="line-text">echo "No Vite, No NPM."</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="line-text">No Vite, No NPM.</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="line-prompt">❯</span>
+                    <span class="line-text green">Success! HTML Generated.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. comparisonSlide -->
+    <section class="slide type-comparison">
+        <div class="comp-title">新旧架构对比</div>
+        <div class="comp-grid">
+            <div class="comp-col comp-left">
+                <div class="comp-col-header">传统Vue架构</div>
+                <ul class="comp-list">
+                    <li>
+                        <span class="comp-icon">×</span>
+                        <div class="comp-item-content">
+                            <div class="comp-item-title">需要安装 Node.js</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="comp-icon">×</span>
+                        <div class="comp-item-content">
+                            <div class="comp-item-title">依赖本地构建服务</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="comp-vs">VS</div>
+            <div class="comp-col comp-right">
+                <div class="comp-col-header">单文件 HTML 架构</div>
+                <ul class="comp-list">
+                    <li>
+                        <span class="comp-icon comp-icon-right">✓</span>
+                        <div class="comp-item-content">
+                            <div class="comp-item-title">开箱即用</div>
+                            <div class="comp-item-desc">双击即可全屏演示</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="comp-icon comp-icon-right">✓</span>
+                        <div class="comp-item-content">
+                            <div class="comp-item-title">极易分享</div>
+                            <div class="comp-item-desc">直接作为附件发送</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. flowSlide -->
+    <section class="slide type-flow">
+        <div class="flow-title">全新工作流</div>
+        <div class="flow-track">
+            <div class="flow-step">
+                <div class="flow-num">01</div>
+                <div class="flow-step-title">大纲解析</div>
+                <div class="flow-step-desc">解析MD内容</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-num">02</div>
+                <div class="flow-step-title">HTML组装</div>
+                <div class="flow-step-desc">提取组件结构</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-num">03</div>
+                <div class="flow-step-title">一键交付</div>
+                <div class="flow-step-desc">产名单文件HTML</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. timelineSlide -->
+    <section class="slide type-timeline">
+        <div class="timeline-title">演进时间线</div>
+        <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-event even">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-date">Phase 1</div>
+                    <div class="timeline-event-title">Vue组件版</div>
+                    <div class="timeline-event-desc">构建了17个核心布局。</div>
+                </div>
+            </div>
+            <div class="timeline-event odd">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-date">Phase 2</div>
+                    <div class="timeline-event-title">HTML单文件版</div>
+                    <div class="timeline-event-desc">全面拥抱零依赖，提升分享体验。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. quoteSlide -->
+    <section class="slide type-quote">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">Less is more. A single HTML file is the ultimate portability.</div>
+        <div class="quote-attribution">
+            <span class="quote-dash">—</span>
+            <span class="quote-author">Frontend Philosophy</span>
+        </div>
+    </section>
+
+    <!-- 13. imageTextSlide -->
+    <section class="slide type-image-text">
+        <div class="img-text-visual">
+            <div style="width:100%; height:300px; background: rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                <span>[Image Placeholder]</span>
+            </div>
+        </div>
+        <div class="img-text-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Demo
+            </div>
+            <div class="img-text-title">图文混排</div>
+            <div class="img-text-desc">左侧是图片占位符，右侧是文字说明。</div>
+            <div class="solution-box">
+                <div class="solution-label">Tips</div>
+                <div class="solution-text">图片路径推荐使用同目录下相对路径或Base64。</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. listSlide -->
+    <section class="slide type-list">
+        <div class="list-title">设计原则清单</div>
+        <div class="list-items">
+            <div class="list-item">
+                <div class="list-num">01</div>
+                <div class="list-item-content">
+                    <div class="list-item-title">乔布斯风标题</div>
+                    <div class="list-item-desc">一口气讲完的核心断言。</div>
+                </div>
+            </div>
+            <div class="list-item">
+                <div class="list-num">02</div>
+                <div class="list-item-content">
+                    <div class="list-item-title">大字报观点</div>
+                    <div class="list-item-desc">少即是多。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. teamSlide -->
+    <section class="slide type-team">
+        <div class="team-title">驱动力</div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #FF5533, #00E5FF)">P</div>
+                <div class="team-name">ppt-generator</div>
+                <div class="team-role">Renderer</div>
+                <div class="team-desc">负责最终输出。</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #00E5FF, #3b82f6)">C</div>
+                <div class="team-name">ppt-checker</div>
+                <div class="team-role">Director</div>
+                <div class="team-desc">负责节奏与卡点。</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 16. gallerySlide -->
+    <section class="slide type-gallery">
+        <div class="gallery-title">组件画廊</div>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background: rgba(255,85,51,0.2)">
+                <div class="gallery-overlay">
+                    <div class="gallery-item-title">组件 A</div>
+                    <div class="gallery-item-desc">色彩斑斓</div>
+                </div>
+            </div>
+            <div class="gallery-item" style="background: rgba(0,229,255,0.2)">
+                <div class="gallery-overlay">
+                    <div class="gallery-item-title">组件 B</div>
+                    <div class="gallery-item-desc">清澈透亮</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 17. endSlide -->
+    <section class="slide type-end">
+        <div class="end-glow"></div>
+        <div class="end-icon">◆</div>
+        <div class="message">生成完毕</div>
+    </section>
+    </div> <!-- end slides-wrapper -->
+
+
+    <script>
+        // Presentation Logic
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+                let currentSlideIndex = 0;
+
+        // Setup page numbers
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        totalPagesEl.textContent = String(slides.length).padStart(2, '0');
+
+        
+        
+        let isScrolling = false;
+        const slidesWrapper = document.getElementById('slides-wrapper');
+
+        function updateProgress(index) {
+            const progress = (index / (slides.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+            currentPageEl.textContent = String(index + 1).padStart(2, '0');
+            currentSlideIndex = index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                isScrolling = true;
+                
+                // Use transform for precise, smooth full-page flip
+                slidesWrapper.style.transform = `translateY(-${index * 100}vh)`;
+                
+                updateProgress(index);
+                
+                // Release scroll lock after transition duration (600ms + 100ms buffer)
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 700);
+            }
+        }
+
+        // Mouse wheel precise scroll
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            // Allow small movements to not trigger
+            if (Math.abs(e.deltaY) > 20) {
+                if (e.deltaY > 0) {
+                    scrollToSlide(currentSlideIndex + 1);
+                } else {
+                    scrollToSlide(currentSlideIndex - 1);
+                }
+            }
+        }, { passive: true });
+
+        // Touch swipe precise scroll
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        window.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (isScrolling) return;
+            const threshold = 50;
+            if (touchStartY - touchEndY > threshold) {
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (touchEndY - touchStartY > threshold) {
+                scrollToSlide(currentSlideIndex - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex - 1);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                scrollToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                scrollToSlide(slides.length - 1);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vintage Editorial PPT Components</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;600;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden!important;background:#f5f0e8;color:#2b2422;font-family:'Source Serif 4','Noto Serif SC',serif;-webkit-font-smoothing:antialiased}
+
+/* Paper Texture */
+.slide{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;z-index:1;background:#f5f0e8}
+.slide::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.7;pointer-events:none}
+
+:root{--bg:#f5f0e8;--ink:#2b2422;--ink-light:rgba(43,36,34,.6);--ink-lighter:rgba(43,36,34,.2);--accent:#8B4513;--accent-light:rgba(139,69,19,.1)}
+
+h1,h2,h3,.serif{font-family:'Playfair Display','Noto Serif SC',serif}
+h1{font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1;letter-spacing:-.02em;text-transform:uppercase}
+h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
+p{font-size:clamp(.9rem,1.4vw,1.1rem);line-height:1.7;color:var(--ink-light)}
+
+.drop-cap{float:left;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:0.8;margin-right:8px;margin-top:6px;color:var(--ink);font-weight:900}
+
+/* Rules / Lines */
+.rule-thick{border:none;border-top:4px solid var(--ink);margin:1rem 0;width:100%}
+.rule-thin{border:none;border-top:1px solid var(--ink);margin:.5rem 0;width:100%}
+.rule-double{border:none;border-top:3px double var(--ink);margin:1rem 0;width:100%}
+.rule-dashed{border:none;border-top:1px dashed var(--ink-lighter);margin:1rem 0;width:100%}
+
+.content{max-width:min(90vw,900px);width:100%;z-index:10;position:relative;background:#f5f0e8;padding:2rem 3rem;border:1px solid var(--ink-lighter);box-shadow:2px 2px 0 rgba(43,36,34,.05)}
+
+/* Global Header & Footer (Newspaper Dateline style) */
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:var(--ink);z-index:1000;width:0%;transition:width .3s}
+.global-header{position:fixed;top:10px;left:30px;right:30px;padding-bottom:10px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;align-items:flex-end;z-index:100;pointer-events:none}
+.gh-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,1.5vw,1.2rem);font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.gh-dateline{font-size:clamp(.7rem,1vw,.8rem);text-transform:uppercase;letter-spacing:2px}
+.gh-right{display:flex;align-items:center;gap:12px}
+.gh-avatar-wrapper{width:36px;height:36px;border-radius:0;border:1px solid var(--ink);padding:2px;filter:grayscale(100%) contrast(120%)}
+.gh-avatar{width:100%;height:100%;object-fit:cover;filter:sepia(50%)}
+.gh-author{font-size:clamp(.7rem,1vw,.8rem);font-style:italic;font-family:'Playfair Display',serif}
+
+.global-footer{position:fixed;bottom:15px;left:30px;right:30px;display:flex;justify-content:center;z-index:100;pointer-events:none}
+.page-number-pill{font-family:'Source Serif 4',serif;font-size:clamp(.9rem,1.2vw,1rem);font-style:italic}
+.page-number-pill::before{content:'- '}
+.page-number-pill::after{content:' -'}
+
+/* Columns */
+.col-2{display:column;column-count:2;column-gap:40px;column-rule:1px solid var(--ink-lighter)}
+.col-3{display:column;column-count:3;column-gap:30px;column-rule:1px solid var(--ink-lighter)}
+
+/* Specific Components */
+.type-cover .content{text-align:center;padding:4rem}
+.dateline-sub{font-size:.8rem;text-transform:uppercase;letter-spacing:4px;color:var(--ink-light);margin-bottom:1rem}
+
+.type-title .content{text-align:center;padding:5rem 2rem}
+.title-deco{font-size:2rem;color:var(--ink-lighter);margin:1rem 0}
+
+.type-message .msg-pull{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-style:italic;line-height:1.4;text-align:center;padding:2rem 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:2rem 0}
+
+.type-question .q-mark{font-family:'Playfair Display',serif;font-size:10rem;line-height:0.8;float:left;margin-right:20px;color:var(--ink)}
+
+.type-split .split-wrap{display:flex;gap:40px}
+.split-main{flex:2}
+.split-side{flex:1;border-left:1px solid var(--ink-lighter);padding-left:40px}
+
+/* Stats as Index/Ledger */
+.ledger{width:100%;border-collapse:collapse;margin-top:2rem;font-family:'Source Serif 4',serif}
+.ledger td{padding:1rem 0;border-bottom:1px dotted var(--ink-lighter);font-size:1.1rem}
+.ledger td:last-child{text-align:right;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700}
+
+/* Grid as Articles */
+.grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:1rem}
+.article h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;text-transform:uppercase}
+.article p{text-align:justify}
+
+/* Terminal as Typewriter */
+.typewriter{background:#e8e0d0;padding:3rem;font-family:'Courier New',Courier,monospace;font-size:1rem;color:#1a1a1a;border:1px solid #d0c8b8;box-shadow:inset 0 0 20px rgba(0,0,0,.05);position:relative;margin-top:1rem}
+.typewriter::before{content:'TELEGRAPH RECEIVER';position:absolute;top:10px;left:10px;font-family:sans-serif;font-size:10px;letter-spacing:1px;color:var(--ink-lighter)}
+.typewriter p{font-family:inherit;color:inherit;font-size:inherit;line-height:1.5}
+
+/* Comparison */
+.comp-wrap{display:flex;gap:40px;margin-top:1rem}
+.comp-col{flex:1;text-align:justify}
+.comp-col h3{text-align:center;font-size:1.5rem;font-style:italic;margin-bottom:1rem;border-bottom:1px solid var(--ink);padding-bottom:.5rem}
+
+/* Flow */
+.flow-wrap{display:flex;flex-direction:column;gap:2rem;margin-top:2rem}
+.flow-step{display:flex;align-items:center;gap:30px}
+.flow-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-style:italic;color:var(--ink-lighter)}
+.flow-text{flex:1}
+
+/* Timeline */
+.chronicle{border-left:2px solid var(--ink);padding-left:30px;margin-top:2rem;margin-left:20px}
+.ch-item{position:relative;margin-bottom:2.5rem}
+.ch-date{position:absolute;left:-100px;top:2px;font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem}
+.ch-item::before{content:'';position:absolute;left:-35px;top:10px;width:8px;height:8px;background:var(--bg);border:2px solid var(--ink);border-radius:50%}
+
+/* Quote */
+.quote-box{padding:2rem 4rem;text-align:center}
+.quote-text{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;line-height:1.5}
+.quote-author{margin-top:1.5rem;text-transform:uppercase;letter-spacing:2px;font-size:.8rem}
+
+/* Image Text */
+.img-editorial{width:100%;height:300px;background:var(--ink-lighter);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-style:italic;color:var(--bg);filter:sepia(80%) grayscale(100%)}
+.caption{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;text-align:right;margin-bottom:1rem;border-bottom:1px solid var(--ink-lighter);padding-bottom:.5rem}
+
+/* List */
+.roman-list{list-style:none;margin-top:1rem}
+.roman-list li{display:flex;gap:20px;margin-bottom:1.5rem}
+.roman-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;min-width:40px}
+
+/* Team */
+.team-wrap{display:flex;justify-content:space-around;margin-top:2rem}
+.t-member{text-align:center;width:200px}
+.t-portrait{width:140px;height:180px;border:1px solid var(--ink);margin:0 auto 1rem;padding:4px;background:#fff}
+.t-inner{width:100%;height:100%;background:var(--ink-lighter);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:3rem;color:var(--bg)}
+.t-member h3{text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin-bottom:.3rem}
+
+/* Gallery */
+.gal-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:2rem}
+.g-photo{aspect-ratio:3/4;border:1px solid var(--ink);padding:6px;background:#fff}
+.g-inner{width:100%;height:100%;background:var(--ink-lighter);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:var(--bg)}
+
+.end-flourish{font-size:4rem;color:var(--ink);margin-bottom:1rem}
+</style>
+</head>
+
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="global-header">
+<div class="gh-left">
+  <div class="gh-title">The Daily Presentation</div>
+  <div class="gh-dateline">Volume I · No. 08 · 2026</div>
+</div>
+<div class="gh-right">
+<span class="gh-author">By M.T.</span>
+<div class="gh-avatar-wrapper">
+                <img src="data:image/jpeg;base64,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" alt="Avatar" class="gh-avatar">
+            </div>
+</div>
+</div>
+<div class="global-footer">
+<div class="page-number-pill">Page <span id="currentPage">01</span> of <span id="totalPages">17</span></div>
+</div>
+<div id="slides-wrapper" style="transition:transform .7s cubic-bezier(.65,0,.35,1);height:100vh;width:100vw;">
+<!-- SLIDES_START -->
+<!-- 1. Cover -->
+<section class="slide type-cover">
+<div class="content">
+<div class="dateline-sub">Volume I · Style Showcase · 2026</div>
+<hr class="rule-thick">
+<hr class="rule-thin" style="margin-top:-8px;margin-bottom:2rem;">
+<h1>Vintage<br>Editorial</h1>
+<hr class="rule-thin" style="margin-top:2rem;margin-bottom:-8px;">
+<hr class="rule-thick">
+<p style="margin-top:1.5rem;"><span class="drop-cap">V</span>intage Editorial 风格借鉴了经典报刊杂志的排版美学。纸张质感底色、衬线字体、首字下沉，让演示充满怀旧的书卷气。</p>
+</div>
+</section>
+
+<!-- 2. Title -->
+<section class="slide type-title">
+<div class="content">
+<div class="dateline-sub">SECTION I</div>
+<h2>排版的美学</h2>
+<div class="title-deco">❧</div>
+<p>探讨文字、间距与留白在古典版面中的力量。</p>
+</div>
+</section>
+
+<!-- 3. Message -->
+<section class="slide type-message">
+<div class="content">
+<div class="dateline-sub" style="text-align:center;">THE PULL QUOTE</div>
+<div class="msg-pull">
+“好的排版如同一面透明的酒杯，<br>不应该喧宾夺主，而是让内容本身散发醇香。”
+</div>
+<p style="text-align:center;">此组件用于在长文中提炼并强调核心金句，吸引读者眼球。</p>
+</div>
+</section>
+
+<!-- 4. Question -->
+<section class="slide type-question">
+<div class="content">
+<div class="q-mark">?</div>
+<div style="padding-top:10px;">
+<h2>为何选择复古风？</h2>
+<hr class="rule-dashed">
+<p>在数字时代，人们对物理质感的渴望愈发强烈。粗糙的纸张纹理、铅字印刷的边缘感，都能唤起一种关于专注与时间的浪漫想象。</p>
+</div>
+</div>
+</section>
+
+<!-- 5. Split -->
+<section class="slide type-split">
+<div class="content">
+<div class="dateline-sub">ANALYSIS</div>
+<div class="split-wrap">
+<div class="split-main">
+<h2>经典双栏布局</h2>
+<p><span class="drop-cap">C</span>olumnar layout，即多栏排版，是报纸时代的伟大发明。它有效地缩短了单行阅读长度，使得眼睛不易疲劳。</p>
+<p style="margin-top:1rem;">左侧区域通常用于长文叙事，而右侧狭长的边栏则用于放置补充信息、小标题或索引。</p>
+</div>
+<div class="split-side">
+<h3 style="font-family:'Playfair Display',serif;margin-bottom:.5rem;">边栏索引</h3>
+<p style="font-size:.85rem;">· 衬线体的历史<br>· 网格系统的建立<br>· 现代主义的冲击</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 6. Stats (Ledger) -->
+<section class="slide type-stats">
+<div class="content">
+<div class="dateline-sub">THE LEDGER</div>
+<h2>核心数据账本</h2>
+<hr class="rule-thick">
+<table class="ledger">
+<tr><td>出版发行量 (Copies)</td><td>10,000</td></tr>
+<tr><td>读者覆盖面 (Readership)</td><td>99%</td></tr>
+<tr><td>排版效率提升 (Efficiency)</td><td>3X</td></tr>
+</table>
+</div>
+</section>
+
+<!-- 7. Card Grid (Articles) -->
+<section class="slide type-card-grid">
+<div class="content">
+<div class="dateline-sub">FEATURES</div>
+<h2>核心排版特征</h2>
+<hr class="rule-thick">
+<div class="grid-2x2">
+<div class="article">
+<h3>首字下沉</h3>
+<p>Drop Cap 引导读者进入正文，是古典排版中最具标志性的装饰手法。</p>
+</div>
+<div class="article">
+<h3>横向分割</h3>
+<p>大量使用不同粗细的水平线，划分信息层级，维持版面秩序。</p>
+</div>
+<div class="article">
+<h3>衬线搭配</h3>
+<p>标题与正文采用不同特征的衬线字体，形成微妙的张力。</p>
+</div>
+<div class="article">
+<h3>纸张质感</h3>
+<p>背景融入极淡的噪点纹理，模拟纸张的物理纤维感。</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 8. Terminal (Typewriter) -->
+<section class="slide type-terminal">
+<div class="content">
+<div class="dateline-sub">TRANSCRIPT</div>
+<h2>打字机电报</h2>
+<p>用于呈现原始代码、日志或未加修饰的文本片段。</p>
+<div class="typewriter">
+<p>STOP.<br>
+AWAITING FURTHER INSTRUCTIONS.<br>
+<br>
+> RUNNING DIAGNOSTICS... OK.<br>
+> ESTABLISHING CONNECTION... SUCCESS.<br>
+<br>
+MESSAGE RECEIVED AT 14:00 HOURS.<br>
+END OF TRANSMISSION.</p>
+</div>
+</div>
+</section>
+
+<!-- 9. Comparison -->
+<section class="slide type-comparison">
+<div class="content">
+<div class="dateline-sub">PRO & CON</div>
+<h2>新旧方案对比</h2>
+<hr class="rule-thick">
+<div class="comp-wrap">
+<div class="comp-col">
+<h3>传统方案</h3>
+<p>采用老式的层级结构，维护成本高昂。虽然在短期内解决了问题，但随着系统复杂度的增加，逐渐显得笨重且难以扩展。信息孤岛现象严重。</p>
+</div>
+<div style="border-left:1px solid var(--ink-lighter);"></div>
+<div class="comp-col">
+<h3>创新方案</h3>
+<p>引入了模块化的思维，如同活字印刷一般，所有组件皆可独立拆卸与重组。不仅提高了响应速度，更在根本上解决了长期迭代的技术债务。</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 10. Flow -->
+<section class="slide type-flow">
+<div class="content">
+<div class="dateline-sub">PROCESS</div>
+<h2>印刷工序流程</h2>
+<div class="flow-wrap">
+<div class="flow-step">
+<div class="flow-num">I.</div>
+<div class="flow-text">
+<h3 style="font-family:'Playfair Display',serif;">拣字与排版</h3>
+<p>根据文稿从铅字架上挑选字模并排入印版。</p>
+</div>
+</div>
+<div class="flow-step">
+<div class="flow-num">II.</div>
+<div class="flow-text">
+<h3 style="font-family:'Playfair Display',serif;">打样与校对</h3>
+<p>印出初步样稿，进行严格的文字与版式校对。</p>
+</div>
+</div>
+<div class="flow-step">
+<div class="flow-num">III.</div>
+<div class="flow-text">
+<h3 style="font-family:'Playfair Display',serif;">上机印刷</h3>
+<p>施加极具质感的油墨，压制于优质纸张之上。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 11. Timeline (Chronicle) -->
+<section class="slide type-timeline">
+<div class="content">
+<div class="dateline-sub">CHRONICLE</div>
+<h2>百年大事纪</h2>
+<div class="chronicle">
+<div class="ch-item">
+<div class="ch-date">1890</div>
+<div class="ch-text">
+<h3 style="font-family:'Playfair Display',serif;margin-bottom:.3rem;">创刊号发行</h3>
+<p>确立了以衬线体和多栏布局为主的核心视觉风格。</p>
+</div>
+</div>
+<div class="ch-item">
+<div class="ch-date">1950</div>
+<div class="ch-text">
+<h3 style="font-family:'Playfair Display',serif;margin-bottom:.3rem;">引入摄影技术</h3>
+<p>手工插画逐渐被高保真的黑白新闻摄影所取代。</p>
+</div>
+</div>
+<div class="ch-item">
+<div class="ch-date">2026</div>
+<div class="ch-text">
+<h3 style="font-family:'Playfair Display',serif;margin-bottom:.3rem;">数字化复兴</h3>
+<p>在屏幕上完美复刻了油墨与纸张的物理质感。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 12. Quote -->
+<section class="slide type-quote">
+<div class="content">
+<div class="quote-box">
+<div class="quote-text">
+“排版是让不可见的思想，<br>穿上可见的得体外衣。”
+</div>
+<div class="quote-author">—— Beatrice Warde</div>
+</div>
+</div>
+</section>
+
+<!-- 13. Image Text (Editorial) -->
+<section class="slide type-image-text">
+<div class="content">
+<div class="dateline-sub">FEATURED STORY</div>
+<div class="img-editorial">FIG. 1 - HISTORICAL ARCHIVE</div>
+<div class="caption">Image Source: New York Public Library</div>
+<div class="col-2">
+<p><span class="drop-cap">T</span>he photograph above captures a pivotal moment. 左图放置历史档案照片或产品复古特写，下方以双栏形式排布深入的评论性文字。这种图文混排方式是经典杂志深度报道的标准范式，显得克制且极具权威感。</p>
+</div>
+</div>
+</section>
+
+<!-- 14. List (Roman) -->
+<section class="slide type-list">
+<div class="content">
+<div class="dateline-sub">MANIFESTO</div>
+<h2>排版准则宣言</h2>
+<hr class="rule-thin">
+<ul class="roman-list">
+<li>
+<div class="roman-num">I.</div>
+<div>
+<h3 style="font-family:'Playfair Display',serif;">尊重字体的骨骼</h3>
+<p>不随意拉伸或挤压文字，保持其原有的韵律。</p>
+</div>
+</li>
+<li>
+<div class="roman-num">II.</div>
+<div>
+<h3 style="font-family:'Playfair Display',serif;">留白即是结构</h3>
+<p>页面上的空白并非多余，而是支撑内容的隐形框架。</p>
+</div>
+</li>
+<li>
+<div class="roman-num">III.</div>
+<div>
+<h3 style="font-family:'Playfair Display',serif;">追求永恒而非流行</h3>
+<p>摒弃过度装饰，回归信息传递的本质与纯粹。</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- 15. Team (Portraits) -->
+<section class="slide type-team">
+<div class="content">
+<div class="dateline-sub" style="text-align:center;">THE AUTHORS</div>
+<h2 style="text-align:center;">特约撰稿人</h2>
+<hr class="rule-thin" style="width:200px;margin:1rem auto;">
+<div class="team-wrap">
+<div class="t-member">
+<div class="t-portrait"><div class="t-inner">A</div></div>
+<h3>Author A</h3>
+<p style="font-size:.8rem;font-style:italic;">Chief Editor</p>
+</div>
+<div class="t-member">
+<div class="t-portrait"><div class="t-inner">B</div></div>
+<h3>Author B</h3>
+<p style="font-size:.8rem;font-style:italic;">Art Director</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 16. Gallery -->
+<section class="slide type-gallery">
+<div class="content">
+<div class="dateline-sub">ARCHIVES</div>
+<h2>历史图集</h2>
+<hr class="rule-thick">
+<div class="gal-wrap">
+<div class="g-photo"><div class="g-inner">1</div></div>
+<div class="g-photo"><div class="g-inner">2</div></div>
+<div class="g-photo"><div class="g-inner">3</div></div>
+</div>
+</div>
+</section>
+
+<!-- 17. End -->
+<section class="slide type-end">
+<div class="content" style="text-align:center;">
+<div class="end-flourish">❦</div>
+<h1>The End</h1>
+<hr class="rule-thin" style="width:100px;margin:1rem auto;">
+<p style="text-transform:uppercase;letter-spacing:2px;font-size:.8rem;">Thank you for reading</p>
+</div>
+</section>
+<!-- SLIDES_END -->
+
+</div>
+<script>
+        // Presentation Logic
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+                let currentSlideIndex = 0;
+
+        // Setup page numbers
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        totalPagesEl.textContent = String(slides.length).padStart(2, '0');
+
+        
+        
+        let isScrolling = false;
+        const slidesWrapper = document.getElementById('slides-wrapper');
+
+        function updateProgress(index) {
+            const progress = (index / (slides.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+            currentPageEl.textContent = String(index + 1).padStart(2, '0');
+            currentSlideIndex = index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                isScrolling = true;
+                
+                // Use transform for precise, smooth full-page flip
+                slidesWrapper.style.transform = `translateY(-${index * 100}vh)`;
+                
+                updateProgress(index);
+                
+                // Release scroll lock after transition duration (600ms + 100ms buffer)
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 700);
+            }
+        }
+
+        // Mouse wheel precise scroll
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            // Allow small movements to not trigger
+            if (Math.abs(e.deltaY) > 20) {
+                if (e.deltaY > 0) {
+                    scrollToSlide(currentSlideIndex + 1);
+                } else {
+                    scrollToSlide(currentSlideIndex - 1);
+                }
+            }
+        }, { passive: true });
+
+        // Touch swipe precise scroll
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        window.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (isScrolling) return;
+            const threshold = 50;
+            if (touchStartY - touchEndY > threshold) {
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (touchEndY - touchStartY > threshold) {
+                scrollToSlide(currentSlideIndex - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex - 1);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                scrollToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                scrollToSlide(slides.length - 1);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terminal Green PPT Components</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden!important;background:#0d1117;color:#c9d1d9;font-family:'JetBrains Mono','Noto Sans SC',monospace;-webkit-font-smoothing:antialiased}
+.slide{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;z-index:1;background:#0d1117}
+.slide::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 1px,rgba(57,211,83,.015) 1px,rgba(57,211,83,.015) 2px);pointer-events:none}
+:root{--bg:#0d1117;--bg2:#161b22;--g:#39d353;--gd:rgba(57,211,83,.15);--t:#c9d1d9;--t2:#484f58;--bd:#30363d;--kw:#ff7b72;--str:#a5d6ff;--fn:#d2a8ff;--num:#ffa657}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.2;margin-bottom:.5rem}
+h2{font-size:clamp(1.2rem,2.5vw,2rem);font-weight:700;margin-bottom:1rem;color:var(--g)}
+p{font-size:clamp(.8rem,1.2vw,1rem);color:var(--t2);line-height:1.6;max-width:600px}
+.content{max-width:min(90vw,900px);width:100%;z-index:10;position:relative}
+.pr{color:var(--g)}.cm{color:var(--t2);font-style:italic}.kw{color:var(--kw)}.str{color:var(--str)}.fn{color:var(--fn)}.num{color:var(--num)}
+.cur{display:inline-block;width:8px;height:.85rem;background:var(--g);margin-left:3px;animation:bk .7s step-end infinite;vertical-align:text-bottom}
+@keyframes bk{50%{opacity:0}}
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--g);z-index:1000;width:0%;transition:width .3s;box-shadow:0 0 8px rgba(57,211,83,.3)}
+.global-header{position:fixed;top:0;left:0;right:0;padding:clamp(1rem,2vw,2rem) clamp(1.5rem,3vw,3rem);display:flex;justify-content:space-between;align-items:flex-start;z-index:100;pointer-events:none}
+.gh-title{font-size:clamp(.75rem,1.2vw,.95rem);color:var(--g);background:var(--gd);padding:4px 14px;border-radius:6px}
+.gh-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.gh-avatar-wrapper{width:clamp(40px,4vw,50px);height:clamp(40px,4vw,50px);border-radius:50%;overflow:hidden;border:2px solid var(--bd);box-shadow:0 0 10px rgba(57,211,83,.15)}
+.gh-avatar{width:100%;height:100%;object-fit:cover}
+.gh-author{font-size:clamp(.65rem,.9vw,.75rem);font-weight:700;color:var(--t2);letter-spacing:1px}
+.global-footer{position:fixed;bottom:0;left:0;right:0;padding:clamp(1rem,2vw,2rem) clamp(1.5rem,3vw,3rem);display:flex;justify-content:center;align-items:flex-end;z-index:100;pointer-events:none}
+.page-number-pill{background:var(--gd);border:1px solid rgba(57,211,83,.2);padding:4px 14px;border-radius:6px;font-size:clamp(.7rem,1vw,.8rem);font-weight:700;color:var(--g)}
+/* Terminal window */
+.term{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px var(--gd)}
+.th{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--bd)}
+.dot{width:12px;height:12px;border-radius:50%}.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.gg{background:#28c840}
+.tt{flex:1;text-align:center;font-size:.7rem;color:var(--t2)}
+.tb{padding:clamp(1.2rem,2.5vw,2rem)}
+.ln{margin-bottom:.3rem;font-size:clamp(.7rem,1.1vw,.9rem);line-height:1.7}
+.sbar{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;padding:5px 16px;background:var(--gd);font-size:.6rem;color:var(--g);border-top:1px solid rgba(57,211,83,.2);z-index:20}
+/* Definition list */
+.tg-card{background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:clamp(1rem,1.8vw,1.5rem);transition:border-color .3s}
+.tg-card:hover{border-color:rgba(57,211,83,.4)}
+.tg-card h3{font-size:clamp(.8rem,1.1vw,.95rem);margin-bottom:.3rem;color:var(--t)}
+.tg-card p{font-size:clamp(.7rem,1vw,.85rem);color:var(--t2)}
+.di-i{background:var(--gd);color:var(--g);width:2rem;height:2rem;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+/* Cover: full terminal */
+.type-cover .term{width:min(90vw,700px)}
+/* Title */
+.type-title h2{font-size:clamp(1.5rem,3vw,2.5rem)}
+/* Message */
+.type-message .msg-term{width:min(90vw,700px)}
+/* Split */
+.type-split .content{display:flex;gap:30px;align-items:center}
+.split-l{flex:1}.split-r{flex:1;display:flex;flex-direction:column;gap:12px}
+/* Stats */
+.stat-row{display:flex;justify-content:center;gap:40px;margin-top:2.5rem}
+.stat-box{background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:1.5rem 2rem;text-align:center}
+.stat-num{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;color:var(--g);text-shadow:0 0 15px rgba(57,211,83,.2);line-height:1}
+/* Grid */
+.grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:1.5rem}
+/* Comparison */
+.comp-row{display:flex;gap:0;margin-top:2.5rem;justify-content:center}
+.comp-card{flex:1;max-width:350px;background:var(--bg2);border:1px solid var(--bd);padding:2.5rem 2rem;text-align:center}
+.comp-card.left{border-radius:8px 0 0 8px;border-right:none}
+.comp-card.right{border-radius:0 8px 8px 0;border-color:rgba(57,211,83,.3);background:rgba(57,211,83,.05)}
+.comp-card h3{font-size:1.2rem;margin-bottom:1.2rem}
+.comp-card.left h3{color:var(--kw)}.comp-card.right h3{color:var(--g)}
+.comp-vs{width:40px;height:40px;background:var(--bg);border:2px solid var(--g);color:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;z-index:10;margin:auto -20px;font-size:.8rem}
+/* Flow */
+.flow-row{display:flex;align-items:center;justify-content:center;margin-top:2.5rem;gap:0}
+.flow-step{background:var(--bg2);border:1px solid var(--bd);padding:1.2rem 1.5rem;border-radius:8px;text-align:center;min-width:150px}
+.flow-step h3{color:var(--g);font-size:.85rem}
+.flow-pipe{color:var(--g);margin:0 .6rem;font-size:1.2rem}
+/* Timeline */
+.tl-wrap{position:relative;margin-top:2.5rem;padding-left:50px}
+.tl-wrap::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--bd)}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-dot{position:absolute;left:-38px;top:18px;width:12px;height:12px;background:var(--g);border-radius:50%;box-shadow:0 0 10px rgba(57,211,83,.4)}
+.tl-item:nth-child(2) .tl-dot{background:var(--fn);box-shadow:0 0 10px rgba(210,168,255,.4)}
+/* Quote */
+.q-block{position:relative}
+.q-sym{font-size:8rem;color:rgba(57,211,83,.1);position:absolute;top:-30px;left:-10px;line-height:1}
+/* Image text */
+.type-image-text .content{display:flex;gap:40px;align-items:center}
+.img-ph{flex:1;height:300px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2)}
+/* List */
+.list-col{display:flex;flex-direction:column;gap:12px;margin-top:1.5rem}
+.list-item{display:flex;align-items:center;gap:16px}
+/* Team */
+.team-row{display:flex;justify-content:center;gap:30px;margin-top:2.5rem}
+.t-card{background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:2rem;text-align:center;width:220px}
+.t-av{width:60px;height:60px;border:2px solid var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--g);margin:0 auto .8rem}
+.t-card:nth-child(2) .t-av{border-color:var(--fn);color:var(--fn)}
+/* Gallery */
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1.5rem}
+.gal-item{height:160px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;transition:border-color .3s}
+.gal-item:hover{border-color:rgba(57,211,83,.4)}
+</style>
+</head>
+
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="global-header">
+<div class="gh-left"><span class="gh-title">$ terminal-green</span></div>
+<div class="gh-right">
+<div class="gh-avatar-wrapper">
+                <img src="data:image/jpeg;base64,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" alt="Avatar" class="gh-avatar">
+            </div>
+<span class="gh-author">MT</span>
+</div>
+</div>
+<div class="global-footer">
+<div class="page-number-pill"><span id="currentPage">01</span> / <span id="totalPages">17</span></div>
+</div>
+<div id="slides-wrapper" style="transition:transform .6s cubic-bezier(.83,0,.17,1);height:100vh;width:100vw;">
+<!-- 1. Cover: Terminal window -->
+<section class="slide type-cover">
+<div class="content" style="display:flex;justify-content:center;">
+<div class="term">
+<div class="th"><div class="dot r"></div><div class="dot y"></div><div class="dot gg"></div><span class="tt">presentation — zsh</span></div>
+<div class="tb">
+<div class="ln"><span class="cm"># Type-Cover 封面页组件</span></div>
+<div class="ln"><span class="pr">$ </span><span class="kw">cat</span> <span class="str">README.md</span></div>
+<div class="ln"></div>
+<div class="ln">极客终端美学。全部内容以终端窗口呈现，</div>
+<div class="ln">适合开发者分享、技术教程、DevOps 报告。</div>
+<div class="ln"></div>
+<div class="ln"><span class="pr">$ </span><span class="cur"></span></div>
+</div>
+</div>
+</div>
+<div class="sbar"><span>PRESENTATION</span><span>Terminal Green</span><span>▸ 滚动翻页</span></div>
+</section>
+
+<!-- 2. Title -->
+<section class="slide type-title">
+<div class="content">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Title 章节标题</span></div>
+<h2 style="margin-top:1rem;">章节标题页</h2>
+<p>标志着新章节的开始。终端注释风格的标题，简洁而醒目。</p>
+</div>
+<div class="sbar"><span>title.sh</span><span>zsh</span><span>section 02</span></div>
+</section>
+
+<!-- 3. Message -->
+<section class="slide type-message">
+<div class="content" style="display:flex;justify-content:center;">
+<div class="term msg-term">
+<div class="th"><div class="dot r"></div><div class="dot y"></div><div class="dot gg"></div><span class="tt">message — important</span></div>
+<div class="tb">
+<div class="ln"><span class="pr">$ </span><span class="kw">echo</span> <span class="str">"Type-Message 核心信息"</span></div>
+<div class="ln"></div>
+<div class="ln" style="font-size:clamp(1.2rem,2.5vw,2rem);color:var(--g);font-weight:700;">核心金句在此突出显示</div>
+<div class="ln"></div>
+<div class="ln"><span class="cm"># 用于突出一句核心结论或关键观点</span></div>
+</div>
+</div>
+</div>
+<div class="sbar"><span>message.sh</span><span>STDOUT</span><span>section 03</span></div>
+</section>
+
+<!-- 4. Question -->
+<section class="slide type-question">
+<div class="content">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Question 提问引导</span></div>
+<div style="margin-top:2rem;display:flex;align-items:center;gap:2rem;">
+<div style="font-size:5rem;color:var(--g);text-shadow:0 0 20px rgba(57,211,83,.3);">?</div>
+<div>
+<h2 style="color:var(--g);">思考题</h2>
+<p>抛出一个引人深思的问题，引发观众互动思考。</p>
+</div>
+</div>
+</div>
+<div class="sbar"><span>question.sh</span><span>STDIN</span><span>section 04</span></div>
+</section>
+
+<!-- 5. Split -->
+<section class="slide type-split">
+<div class="content">
+<div class="split-l">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Split</span></div>
+<h2>左右分栏</h2>
+<p>左侧文字说明，右侧堆叠终端风格卡片。适合主论点 + 代码示例的并列展示。</p>
+</div>
+<div class="split-r">
+<div class="tg-card"><h3><span class="pr">→ </span>要点 A</h3><p>终端风格卡片说明要点。</p></div>
+<div class="tg-card"><h3><span class="pr">→ </span>要点 B</h3><p>保持一致的暗色调性。</p></div>
+</div>
+</div>
+<div class="sbar"><span>split.sh</span><span>2 panels</span><span>section 05</span></div>
+</section>
+
+<!-- 6. Stats -->
+<section class="slide type-stats">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="kw">cat</span> <span class="str">metrics.json</span> | <span class="fn">jq</span></div>
+<h2 style="margin-top:1rem;">Type-Stats 核心数据</h2>
+<p style="margin:0 auto;">大字号绿色数字 + 终端容器框，让数据一目了然。</p>
+<div class="stat-row">
+<div class="stat-box"><div class="stat-num">10K+</div><p>用户数</p></div>
+<div class="stat-box"><div class="stat-num">99%</div><p>准确率</p></div>
+<div class="stat-box"><div class="stat-num">3X</div><p>加速比</p></div>
+</div>
+</div>
+<div class="sbar"><span>metrics.json</span><span>3 fields</span><span>section 06</span></div>
+</section>
+
+<!-- 7. Card Grid -->
+<section class="slide type-card-grid">
+<div class="content">
+<div class="ln"><span class="pr">$ </span><span class="fn">ls</span> <span class="str">features/</span></div>
+<h2 style="margin-top:.5rem;">Type-Card-Grid 特性网格</h2>
+<p>展示 4 个并列特征，如同列出目录内容。</p>
+<div class="grid-2x2">
+<div class="tg-card"><div class="di-i" style="margin-bottom:.5rem;">01</div><h3>特性 A</h3><p>描述第一项特征。</p></div>
+<div class="tg-card"><div class="di-i" style="margin-bottom:.5rem;">02</div><h3>特性 B</h3><p>描述第二项特征。</p></div>
+<div class="tg-card"><div class="di-i" style="margin-bottom:.5rem;">03</div><h3>特性 C</h3><p>描述第三项特征。</p></div>
+<div class="tg-card"><div class="di-i" style="margin-bottom:.5rem;">04</div><h3>特性 D</h3><p>描述第四项特征。</p></div>
+</div>
+</div>
+<div class="sbar"><span>features/</span><span>4 items</span><span>section 07</span></div>
+</section>
+
+<!-- 8. Terminal (code) -->
+<section class="slide type-terminal">
+<div class="content">
+<h2>Type-Terminal 代码终端</h2>
+<p>专门用于展示代码片段、命令行或系统日志。</p>
+<div class="term" style="margin-top:1.5rem;">
+<div class="th"><div class="dot r"></div><div class="dot y"></div><div class="dot gg"></div><span class="tt">demo.py — python3</span></div>
+<div class="tb">
+<div class="ln"><span class="kw">def</span> <span class="fn">main</span>():</div>
+<div class="ln">    config = <span class="fn">load_config</span>(<span class="str">"settings.yaml"</span>)</div>
+<div class="ln">    result = <span class="fn">process</span>(config)</div>
+<div class="ln">    <span class="kw">print</span>(<span class="str">f"Done: </span><span class="num">{result}</span><span class="str">"</span>)</div>
+</div>
+</div>
+</div>
+<div class="sbar"><span>demo.py</span><span>python3</span><span>section 08</span></div>
+</section>
+
+<!-- 9. Comparison -->
+<section class="slide type-comparison">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="fn">diff</span> <span class="kw">old.conf</span> <span class="str">new.conf</span></div>
+<h2 style="margin-top:.5rem;">Type-Comparison 对比</h2>
+<p style="margin:0 auto;">红 vs 绿的 diff 风格对比，天然适合技术方案对照。</p>
+<div class="comp-row">
+<div class="comp-card left"><h3>- 传统方案</h3><p>效率低下<br><br>成本高昂</p></div>
+<div class="comp-vs">VS</div>
+<div class="comp-card right"><h3>+ 创新方案</h3><p>极速响应<br><br>降本增效</p></div>
+</div>
+</div>
+<div class="sbar"><span>diff</span><span>2 files</span><span>section 09</span></div>
+</section>
+
+<!-- 10. Flow -->
+<section class="slide type-flow">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Flow 管道流程</span></div>
+<h2 style="margin-top:.5rem;">步骤流程</h2>
+<p style="margin:0 auto;">用管道符 | 连接步骤，Unix 哲学的流转表达。</p>
+<div class="flow-row">
+<div class="flow-step"><h3>发现</h3></div>
+<div class="flow-pipe">|</div>
+<div class="flow-step"><h3>方案</h3></div>
+<div class="flow-pipe">|</div>
+<div class="flow-step"><h3>执行</h3></div>
+</div>
+</div>
+<div class="sbar"><span>pipeline.sh</span><span>3 stages</span><span>section 10</span></div>
+</section>
+
+<!-- 11. Timeline -->
+<section class="slide type-timeline">
+<div class="content">
+<div class="ln"><span class="pr">$ </span><span class="fn">git</span> <span class="kw">log</span> <span class="str">--oneline</span></div>
+<h2 style="margin-top:.5rem;">Type-Timeline 时间轴</h2>
+<p>如同 git log，展示项目里程碑。</p>
+<div class="tl-wrap">
+<div class="tl-item"><div class="tl-dot"></div><div class="tg-card"><h3 style="color:var(--g);">Q1 建设期</h3><p>完成基础设施建设。</p></div></div>
+<div class="tl-item"><div class="tl-dot"></div><div class="tg-card"><h3 style="color:var(--fn);">Q2 爆发期</h3><p>产品核心功能上线。</p></div></div>
+</div>
+</div>
+<div class="sbar"><span>git log</span><span>2 commits</span><span>section 11</span></div>
+</section>
+
+<!-- 12. Quote -->
+<section class="slide type-quote">
+<div class="content">
+<div class="q-block">
+<div class="q-sym">"</div>
+<div style="position:relative;z-index:10;">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Quote 名人名言</span></div>
+<h2 style="font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.5;margin-top:1rem;color:var(--t);">引用业内权威语录，<br><span style="color:var(--g);">增加版面重量感。</span></h2>
+<p style="margin-top:1rem;">—— 某位开源大佬</p>
+</div>
+</div>
+</div>
+<div class="sbar"><span>quote.md</span><span>blockquote</span><span>section 12</span></div>
+</section>
+
+<!-- 13. Image Text -->
+<section class="slide type-image-text">
+<div class="content">
+<div class="img-ph">IMAGE</div>
+<div style="flex:1;">
+<div class="ln"><span class="pr">$ </span><span class="cm"># Type-Image-Text</span></div>
+<h2>沉浸图文</h2>
+<p>左侧放置截图或产品图，右侧进行技术解说。</p>
+</div>
+</div>
+<div class="sbar"><span>screenshot.png</span><span>image/text</span><span>section 13</span></div>
+</section>
+
+<!-- 14. List -->
+<section class="slide type-list">
+<div class="content">
+<div class="ln"><span class="pr">$ </span><span class="fn">cat</span> <span class="str">checklist.md</span></div>
+<h2 style="margin-top:.5rem;">Type-List 强调列表</h2>
+<p>终端编号图标替代默认圆点，逐条强调。</p>
+<div class="list-col">
+<div class="list-item"><div class="di-i">01</div><div class="tg-card" style="flex:1;"><h3>第一条准则</h3><p>描述核心要求。</p></div></div>
+<div class="list-item"><div class="di-i">02</div><div class="tg-card" style="flex:1;"><h3>第二条准则</h3><p>描述执行规范。</p></div></div>
+</div>
+</div>
+<div class="sbar"><span>checklist.md</span><span>2 items</span><span>section 14</span></div>
+</section>
+
+<!-- 15. Team -->
+<section class="slide type-team">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="fn">who</span></div>
+<h2 style="margin-top:.5rem;">Type-Team 团队介绍</h2>
+<p style="margin:0 auto;">展示核心成员，终端风格的个人卡片。</p>
+<div class="team-row">
+<div class="t-card"><div class="t-av">A</div><h3>讲师 A</h3><p>资深架构师</p></div>
+<div class="t-card"><div class="t-av">B</div><h3>讲师 B</h3><p>视觉设计师</p></div>
+</div>
+</div>
+<div class="sbar"><span>team</span><span>2 users</span><span>section 15</span></div>
+</section>
+
+<!-- 16. Gallery -->
+<section class="slide type-gallery">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="fn">ls</span> <span class="str">gallery/</span></div>
+<h2 style="margin-top:.5rem;">Type-Gallery 图片画廊</h2>
+<p style="margin:0 auto;">并列展示多张图片或截图。</p>
+<div class="gal-grid">
+<div class="gal-item"></div><div class="gal-item"></div><div class="gal-item"></div>
+</div>
+</div>
+<div class="sbar"><span>gallery/</span><span>3 files</span><span>section 16</span></div>
+</section>
+
+<!-- 17. End -->
+<section class="slide type-end">
+<div class="content" style="text-align:center;">
+<div class="ln"><span class="pr">$ </span><span class="kw">exit</span></div>
+<h1 style="color:var(--g);margin-top:2rem;">Type-End</h1>
+<p style="margin:0 auto;text-align:center;">演示结束。通常包含感谢语或 Call to Action。</p>
+<div style="margin-top:2rem;"><span class="pr">$ </span><span class="cur"></span></div>
+</div>
+<div class="sbar"><span>PRESENTATION</span><span>END</span><span>exit 0</span></div>
+</section>
+
+</div>
+<script>
+        // Presentation Logic
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+                let currentSlideIndex = 0;
+
+        // Setup page numbers
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        totalPagesEl.textContent = String(slides.length).padStart(2, '0');
+
+        
+        
+        let isScrolling = false;
+        const slidesWrapper = document.getElementById('slides-wrapper');
+
+        function updateProgress(index) {
+            const progress = (index / (slides.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+            currentPageEl.textContent = String(index + 1).padStart(2, '0');
+            currentSlideIndex = index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                isScrolling = true;
+                
+                // Use transform for precise, smooth full-page flip
+                slidesWrapper.style.transform = `translateY(-${index * 100}vh)`;
+                
+                updateProgress(index);
+                
+                // Release scroll lock after transition duration (600ms + 100ms buffer)
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 700);
+            }
+        }
+
+        // Mouse wheel precise scroll
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            // Allow small movements to not trigger
+            if (Math.abs(e.deltaY) > 20) {
+                if (e.deltaY > 0) {
+                    scrollToSlide(currentSlideIndex + 1);
+                } else {
+                    scrollToSlide(currentSlideIndex - 1);
+                }
+            }
+        }, { passive: true });
+
+        // Touch swipe precise scroll
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        window.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (isScrolling) return;
+            const threshold = 50;
+            if (touchStartY - touchEndY > threshold) {
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (touchEndY - touchStartY > threshold) {
+                scrollToSlide(currentSlideIndex - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                scrollToSlide(currentSlideIndex - 1);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                scrollToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                scrollToSlide(slides.length - 1);
+            }
+        });
+    </script>
+</body>
+</html>

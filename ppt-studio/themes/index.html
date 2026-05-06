@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPT Themes Generator Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:clamp(2rem,5vw,4rem)}
+h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.sub{color:rgba(255,255,255,.35);font-size:clamp(.75rem,1.2vw,1rem);margin-bottom:clamp(1.5rem,3vw,3rem);font-weight:300}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(12px,2vw,20px)}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:clamp(1.2rem,2.5vw,2rem);text-decoration:none;color:#fff;transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.card-num{font-size:clamp(.6rem,1vw,.8rem);font-weight:800;font-family:monospace;margin-bottom:8px;opacity:.4}
+.card-title{font-size:clamp(1rem,1.8vw,1.4rem);font-weight:800;margin-bottom:6px}
+.card-desc{font-size:clamp(.65rem,1vw,.85rem);color:rgba(255,255,255,.35);line-height:1.5;font-weight:300}
+.card-preview{width:100%;height:4px;border-radius:2px;margin-top:clamp(.8rem,1.5vw,1rem)}
+
+/* Color accents per card based on theme */
+.c-base:hover{border-color:rgba(100,100,255,.3)}.p-base{background:#6464FF}
+.c-bold:hover{border-color:rgba(255,87,34,.3)}.p-bold{background:#FF5722}
+.c-cv:hover{border-color:rgba(255,213,79,.3)}.p-cv{background:#FFD54F}
+.c-nt:hover{border-color:rgba(129,199,132,.3)}.p-nt{background:linear-gradient(90deg,#81C784,#64B5F6)}
+.c-pg:hover{border-color:rgba(244,143,177,.3)}.p-pg{background:linear-gradient(90deg,#F48FB1,#CE93D8)}
+.c-sp:hover{border-color:rgba(255,138,101,.3)}.p-sp{background:linear-gradient(90deg,#FF8A65,#81C784,#B39DDB)}
+.c-ve:hover{border-color:rgba(139,69,19,.3)}.p-ve{background:#8B4513}
+.c-nc:hover{border-color:rgba(0,255,204,.3)}.p-nc{background:linear-gradient(90deg,#00ffcc,#ff00aa)}
+.c-tg:hover{border-color:rgba(57,211,83,.3)}.p-tg{background:#39d353}
+.c-db:hover{border-color:rgba(200,184,138,.3)}.p-db{background:#c8b88a}
+
+.footer{margin-top:clamp(2rem,4vw,3rem);text-align:center;color:rgba(255,255,255,.15);font-size:clamp(.6rem,.9vw,.75rem)}
+</style>
+</head>
+<body>
+
+<h1>🎨 PPT Themes Generator Showcase</h1>
+<p class="sub">10 种独创视觉主题 · 每种含 17 类核心组件排版 · 点击卡片查看预览</p>
+
+<div class="grid">
+  <a class="card c-base" href="ultimate-dark.html">
+    <div class="card-num">Base / Default</div>
+    <div class="card-title">Ultimate Dark</div>
+    <div class="card-desc">核心基准主题。深邃暗色渐变，高亮蓝紫色强调，专业、冷峻的科技感风格。</div>
+    <div class="card-preview p-base"></div>
+  </a>
+
+  <a class="card c-cv" href="creative-voltage.html">
+    <div class="card-num">Theme 01</div>
+    <div class="card-title">Creative Voltage</div>
+    <div class="card-desc">狂野粗野主义。奶油黄底色，高对比高亮卡片，活泼充满手工感的涂鸦阴影。</div>
+    <div class="card-preview p-cv"></div>
+  </a>
+
+  <a class="card c-nt" href="notebook-tabs.html">
+    <div class="card-num">Theme 02</div>
+    <div class="card-title">Notebook Tabs</div>
+    <div class="card-desc">手账美学。横格纸背景，手写体标注，便利贴与纸胶带元素，适合知识管理。</div>
+    <div class="card-preview p-nt"></div>
+  </a>
+
+  <a class="card c-pg" href="pastel-geometry.html">
+    <div class="card-num">Theme 03</div>
+    <div class="card-title">Pastel Geometry</div>
+    <div class="card-desc">柔和几何风。马卡龙色系，圆角卡片，半透明磨砂玻璃质感，温和且具现代感。</div>
+    <div class="card-preview p-pg"></div>
+  </a>
+
+  <a class="card c-bold" href="bold-signal.html">
+    <div class="card-num">Theme 04</div>
+    <div class="card-title">Bold Signal</div>
+    <div class="card-desc">高冲击力暗黑。暗色渐变底搭配明艳橙色大卡片，网格纹理，适合产品发布会。</div>
+    <div class="card-preview p-bold"></div>
+  </a>
+
+  <a class="card c-nc" href="neon-cyber.html">
+    <div class="card-num">Theme 05</div>
+    <div class="card-title">Neon Cyber</div>
+    <div class="card-desc">赛博朋克风。青色/品红光晕，扫描线纹理，科技感 HUD 角标，适合前沿科技演示。</div>
+    <div class="card-preview p-nc"></div>
+  </a>
+
+  <a class="card c-tg" href="terminal-green.html">
+    <div class="card-num">Theme 06</div>
+    <div class="card-title">Terminal Green</div>
+    <div class="card-desc">纯终端美学。全屏命令行窗口，JetBrains Mono 字体，绿色光标，极客最爱。</div>
+    <div class="card-preview p-tg"></div>
+  </a>
+
+  <a class="card c-db" href="dark-botanical.html">
+    <div class="card-num">Theme 07</div>
+    <div class="card-title">Dark Botanical</div>
+    <div class="card-desc">复古暗金风。深邃墨绿底色，金色高雅衬线体排版，背景隐约可见藤蔓装饰。</div>
+    <div class="card-preview p-db"></div>
+  </a>
+
+  <a class="card c-ve" href="vintage-editorial.html">
+    <div class="card-num">Theme 08</div>
+    <div class="card-title">Vintage Editorial</div>
+    <div class="card-desc">报刊排版美学。泛黄纸张纹理，首字下沉，多栏多段落排布，沉稳有书卷气。</div>
+    <div class="card-preview p-ve"></div>
+  </a>
+
+  <a class="card c-sp" href="split-pastel.html">
+    <div class="card-num">Theme 09</div>
+    <div class="card-title">Split Pastel</div>
+    <div class="card-desc">马卡龙双色分屏。彻底打破单屏居中布局，强制左右分栏，毛玻璃卡片极简风。</div>
+    <div class="card-preview p-sp"></div>
+  </a>
+</div>
+
+<div class="footer">PPT Themes Generator · MT · 2026</div>
+
+</body>
+</html>

@@ -115,13 +115,13 @@
         .stat-cluster .n-card:nth-child(3) { transform: rotate(1deg); z-index: 2; box-shadow: 8px 8px 0 var(--accent-3); }
         .stat-num { font-size: clamp(3rem, 5vw, 4rem); font-weight: 900; line-height: 1; margin-bottom: 0.5rem; color: #000; }
 
-        /* 7. Card Grid - Offset Masonry */
-        .type-card-grid .offset-grid { position: relative; height: 350px; margin-top: 2rem; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .offset-grid .n-card { position: absolute; width: 280px; }
-        .offset-grid .n-card:nth-child(1) { top: 0; left: 0; box-shadow: 6px 6px 0 var(--accent-1); z-index: 1; }
-        .offset-grid .n-card:nth-child(2) { top: 30px; right: 0; box-shadow: 6px 6px 0 var(--accent-2); z-index: 2; }
-        .offset-grid .n-card:nth-child(3) { bottom: 0; left: 40px; box-shadow: 6px 6px 0 var(--accent-3); z-index: 3; }
-        .offset-grid .n-card:nth-child(4) { bottom: 20px; right: 40px; box-shadow: 6px 6px 0 #000; z-index: 4; }
+        /* 7. Card Grid - Clean 2x2 */
+        .type-card-grid .offset-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 3rem; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .offset-grid .n-card { width: 100%; transform: none !important; padding: 2rem; }
+        .offset-grid .n-card:nth-child(1) { box-shadow: 8px 8px 0 var(--accent-1); }
+        .offset-grid .n-card:nth-child(2) { box-shadow: 8px 8px 0 var(--accent-2); }
+        .offset-grid .n-card:nth-child(3) { box-shadow: 8px 8px 0 var(--accent-3); }
+        .offset-grid .n-card:nth-child(4) { box-shadow: 8px 8px 0 #000; }
 
         /* 8. Terminal */
         .terminal-box { background: #fff; border: 4px solid #000; border-radius: 12px; box-shadow: 10px 10px 0 var(--accent-1); margin-top: 2rem; overflow: hidden; }
@@ -133,12 +133,12 @@
         .terminal-body { padding: clamp(1.5rem, 3vw, 2rem); font-family: 'Courier New', Courier, monospace; font-size: clamp(0.9rem, 1.4vw, 1.1rem); color: #000; font-weight: 700; line-height: 1.6; }
         .cmd-line::before { content: "❯ "; color: var(--accent-2); }
 
-        /* 9. Comparison - Crashing Cards */
-        .type-comparison .crash-container { display: flex; justify-content: center; align-items: center; margin-top: 3rem; position: relative; }
-        .crash-card { width: 300px; padding: 2rem; background: #fff; border: 4px solid #000; border-radius: 16px; position: relative; }
-        .crash-card.left { transform: rotate(-4deg); box-shadow: -8px 8px 0 var(--accent-2); z-index: 1; }
-        .crash-card.right { transform: rotate(3deg); box-shadow: 8px 8px 0 var(--accent-3); margin-left: -20px; z-index: 2; }
-        .vs-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-10deg); background: #000; color: var(--accent-1); font-weight: 900; font-size: 2rem; padding: 15px; border-radius: 50%; border: 4px solid #fff; z-index: 10; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* 9. Comparison - Side by Side */
+        .type-comparison .crash-container { display: flex; justify-content: center; align-items: stretch; gap: 30px; margin-top: 3rem; }
+        .crash-card { width: 340px; padding: 2.5rem 2rem; background: #fff; border: 4px solid #000; border-radius: 16px; transform: none !important; }
+        .crash-card.left { box-shadow: 10px 10px 0 var(--accent-2); }
+        .crash-card.right { box-shadow: 10px 10px 0 var(--accent-3); }
+        .vs-badge { position: static; background: #000; color: var(--accent-1); font-weight: 900; font-size: 1.8rem; border-radius: 50%; border: 4px solid #fff; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; box-shadow: 6px 6px 0 rgba(0,0,0,0.2); transform: rotate(-5deg); z-index: 10; flex-shrink: 0; align-self: center; }
 
         /* 10. Flow - Solid Arrows */
         .type-flow .flow-container { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 3rem; }

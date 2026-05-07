@@ -9,7 +9,9 @@
 | dbhub-util-claude | Claude Code 项目级 DBHub 数据库 MCP 配置 | `npx skills add SuGarMT/Skills@dbhub-util-claude` |
 | dbhub-util-codex | Codex 项目级 DBHub 数据库 MCP 配置 | `npx skills add SuGarMT/Skills@dbhub-util-codex` |
 | git-skip | 本地开发配置文件 Git 跳过追踪 | `npx skills add SuGarMT/Skills@git-skip` |
-| karpathy-guidelines | 整合 Karpathy AI 编码行为指南到 CLAUDE.md/AGENTS.md | `npx skills add SuGarMT/Skills@karpathy-guidelines` |
+| karpathy-guidelines | 整合 Karpathy AI 编码行为指南到 CLAUDE.md/AGENTS.md/GEMINI.md | `npx skills add SuGarMT/Skills@karpathy-guidelines` |
+| frontend-slides | 零依赖富动画 HTML 演示文稿生成（支持 PPT/PPTX 转换） | `npx skills add SuGarMT/Skills@frontend-slides` |
+| ppt-studio | 一站式 HTML 演示文稿工作台（大纲→讨论→主题→生成→审核） | `npx skills add SuGarMT/Skills@ppt-studio` |
 | ppt-generator | 基于大纲生成高质量 PPT 演示文稿 | `npx skills add SuGarMT/Skills@ppt-generator` |
 | ppt-script | 教程讲解与技术分享的讲稿转化工具 | `npx skills add SuGarMT/Skills@ppt-script` |
 | ppt-checker | PPT 大纲与口播稿对齐审核检查器 | `npx skills add SuGarMT/Skills@ppt-checker` |

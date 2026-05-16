@@ -304,6 +304,21 @@ description: "一站式 HTML 演示文稿工作台。从一句话、一个主题
 
 这样即使内容相同，**标题风格 + 视觉风格**的组合也能产生显著差异（而非 90% 相似的重复输出）。
 
+### 部署脚本
+
+PPT 生成完成后，将部署脚本模板复制到 PPT 文件夹内，方便用户后续手动发布。
+
+**操作**：将 skill 资源 [assets/deploy.sh](assets/deploy.sh) 复制到 PPT 输出文件夹中。
+
+用户需要发布时，在 PPT 文件夹内执行：
+```bash
+bash deploy.sh <路径名称>
+# 示例: bash deploy.sh fb-ads-tutorial
+```
+脚本会自动清空远程对应文件夹的 index 文件，上传文件夹内所有文件，并打印 `https://ppt.inuo.cc/<路径名称>/xxx.html` 格式的访问地址。
+
+路径名称要求：**简短的全英文**，小写，单词间用 `-` 连接（如 `fb-ads-tutorial`、`gold-trading`）。
+
 **⚠ 阶段结束时：更新 `_progress.md`，记录生成的文件路径。下一步 → 阶段 5。**
 
 ---
@@ -378,5 +393,10 @@ YYYYMMDD_核心标题/
 ├── _progress.md        # 进度追踪文件
 ├── 大纲.md             # 确认后的最终大纲
 ├── presentation.html   # 生成的 PPT
+├── deploy.sh           # 部署脚本（从模板复制）
 └── 口播稿.md           # 口播稿（可选）
 ```
+
+**部署脚本模板**位于 skill 资源目录：[assets/deploy.sh](assets/deploy.sh)
+**发布地址格式**：`https://ppt.inuo.cc/<路径名称>/<文件名>.html`
+

@@ -1,6 +1,6 @@
 ---
 name: dbhub-util
-description: Use when user provides database connection info (JDBC URL, Spring Boot datasource config, DSN, or database key-value pairs) and wants to configure project-local DBHub MCP for Claude, Codex, or Antigravity. This skill detects the user's current environment, generates dbhub.toml, and configures the corresponding project-local MCP server definition. Make sure to use this skill whenever the user mentions configuring databases, setting up project-local DBHub, or connecting databases using MCP in Claude, Codex, or Antigravity, even if they don't explicitly name 'dbhub-util'.
+description: Use when user provides database connection info (JDBC URL, Spring Boot datasource config, DSN, or database key-value pairs) and wants to configure project-local DBHub MCP for Claude, Codex, or Antigravity. This skill detects the user's current environment, generates dbhub.toml at the project root, and configures the corresponding project-local MCP server definition. Make sure to use this skill whenever the user mentions configuring databases, setting up project-local DBHub, or connecting databases using MCP in Claude, Codex, or Antigravity, even if they don't explicitly name 'dbhub-util'.
 ---
 # MT DBHub Util (Multi-Environment)
 
@@ -12,8 +12,9 @@ description: Use when user provides database connection info (JDBC URL, Spring B
 
 - DBHub 使用 `@bytebase/dbhub@latest`
 - TOML 顶层结构必须是 `[[sources]]`
+- `dbhub.toml` 必须写到项目根目录下的 `<project>/dbhub.toml`
 - MCP 服务名固定为 `dbhub`
-- 智能检测并区分不同的开发环境，将数据源配置和 MCP 注册表写入正确的目标文件路径。
+- 智能检测并区分不同的开发环境，将 MCP 注册表写入正确的目标文件路径，且其中引用的 `dbhub.toml` 使用绝对路径。
 
 ---
 
@@ -36,9 +37,9 @@ description: Use when user provides database connection info (JDBC URL, Spring B
 
 | 环境 | 数据库配置路径 `dbhub.toml` | 项目级 MCP 注册文件路径 | 注册文件格式 | 注册服务声明方式 | 额外必须字段 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Claude** | `<project>/.claude/dbhub.toml` | `<project>/.mcp.json` | **JSON** | `"mcpServers": { "dbhub": {...} }` | 无 |
-| **Codex** | `<project>/.codex/dbhub.toml` | `<project>/.codex/config.toml` | **TOML** | `[mcp_servers.dbhub]` | `type = "stdio"` |
-| **Antigravity** | `<project>/.agents/dbhub.toml` | `<project>/.agents/mcp_config.json` | **JSON** | `"mcpServers": { "dbhub": {...} }` | 无 |
+| **Claude** | `<project>/dbhub.toml` | `<project>/.mcp.json` | **JSON** | `"mcpServers": { "dbhub": {...} }` | 无 |
+| **Codex** | `<project>/dbhub.toml` | `<project>/.codex/config.toml` | **TOML** | `[mcp_servers.dbhub]` | `type = "stdio"` |
+| **Antigravity** | `<project>/dbhub.toml` | `<project>/.agents/mcp_config.json` | **JSON** | `"mcpServers": { "dbhub": {...} }` | 无 |
 
 ---
 
@@ -101,7 +102,7 @@ type: mysql
 ## 各环境输出模板要求
 
 ### 1. 数据库数据源配置 (`dbhub.toml`)
-写入用户判定环境对应的 `dbhub.toml` 路径。
+统一写入项目根目录路径：`<project>/dbhub.toml`。
 
 ```toml
 [[sources]]
@@ -129,7 +130,7 @@ read_only = false
         "-y",
         "@bytebase/dbhub@latest",
         "--config",
-        "<absolute-project-path>/.claude/dbhub.toml"
+        "<absolute-project-path>/dbhub.toml"
       ]
     }
   }
@@ -141,7 +142,7 @@ read_only = false
 [mcp_servers.dbhub]
 type = "stdio"
 command = "npx"
-args = ["-y", "@bytebase/dbhub@latest", "--config", "<absolute-project-path>/.codex/dbhub.toml"]
+args = ["-y", "@bytebase/dbhub@latest", "--config", "<absolute-project-path>/dbhub.toml"]
 ```
 
 #### C. Antigravity 模式 (写入 `<project>/.agents/mcp_config.json`)
@@ -154,7 +155,7 @@ args = ["-y", "@bytebase/dbhub@latest", "--config", "<absolute-project-path>/.co
         "-y",
         "@bytebase/dbhub@latest",
         "--config",
-        "/<absolute-project-path>/.agents/dbhub.toml"
+        "<absolute-project-path>/dbhub.toml"
       ]
     }
   }
@@ -172,8 +173,8 @@ args = ["-y", "@bytebase/dbhub@latest", "--config", "<absolute-project-path>/.co
 
 1. 解析用户输入的数据库配置，提取关键字段。若缺失必要字段或格式无法解析，指出问题并要求用户确认。
 2. 通过上述环境判断方法，确定目标环境（Claude、Codex 或 Antigravity）。
-3. 确认当前项目的根目录，检查并创建存放 `dbhub.toml` 的目标文件夹（如 `.claude/`、`.codex/` 或 `.agents/`）。
-4. 在对应路径下，生成或以增量形式更新 `dbhub.toml` 数据库配置文件。
+3. 确认当前项目的根目录，检查并创建存放 MCP 注册文件的目标文件夹（如 `.claude/`、`.codex/` 或 `.agents/`）。
+4. 在项目根目录下，生成或以增量形式更新 `dbhub.toml` 数据库配置文件。
 5. 在对应路径下，生成或以增量形式更新项目级的 MCP 配置文件，将服务名注册为 `dbhub`。
 6. 反馈给用户配置完成的信息，包含：
    - 识别出的目标环境模式。
@@ -195,8 +196,24 @@ args = ["-y", "@bytebase/dbhub@latest", "--config", "<absolute-project-path>/.co
 | 混淆环境：例如在 Antigravity 中生成了 `.codex/config.toml` | 必须根据识别的环境写入对应的配置文件 |
 | 误修改或覆盖了全局的 MCP 配置文件 | 只修改项目本地对应的配置文件 |
 | 服务名写成 `dbutil` | 服务名固定为 `dbhub` |
+| 写入 `.mcp.json` 替换了 Antigravity 配置 | Antigravity 必须写入 `.agents/mcp_config.json` |
+| 将 `dbhub.toml` 写入到其他子配置目录 | 统一将 `dbhub.toml` 写入项目根目录 `<project>/dbhub.toml` |
 
 ### 严禁行为 (Never Do)
 - 绝不要把 `dbhub.toml` 写入到全局路径。
 - 绝不要混淆不同环境的配置文件名和格式（如把 TOML 配置写入 `.mcp.json`）。
 - 绝不要在用户未授权或存在参数冲突时强行猜测写入。
+- `--config` 参数值必须是绝对路径，不可使用相对路径。
+- 不要将项目级配置写到 `.mcp.json` 中（除非是 Claude 环境）。
+- 不要为 `dbhub.toml` 创建额外的子目录。
+
+## Final Response Requirements
+
+完成后必须告诉用户：
+
+- 解析出的 `type`
+- 解析出的 `host/port/database/user`
+- `dbhub.toml` 实际写入路径（为当前项目根目录下 `<project>/dbhub.toml`）
+- 项目级 MCP 注册文件实际写入路径
+- 项目级 MCP 注册文件中加载的服务名为 `dbhub`
+- 提醒：如果 Antigravity 未信任该项目，需在 IDE 中确认信任后项目级配置才会生效。

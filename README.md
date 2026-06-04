@@ -6,9 +6,7 @@
 
 | Skill | 描述 | 安装命令 |
 |---|---|---|
-| dbhub-util-claude | Claude Code 项目级 DBHub 数据库 MCP 配置 | `npx skills add SuGarMT/Skills@dbhub-util-claude` |
-| dbhub-util-codex | Codex 项目级 DBHub 数据库 MCP 配置 | `npx skills add SuGarMT/Skills@dbhub-util-codex` |
-| dbhub-util-antigravity | Antigravity 项目级 DBHub 数据库 MCP 配置 | `npx skills add SuGarMT/Skills@dbhub-util-antigravity` |
+| dbhub-util | 项目级 DBHub 数据库 MCP 配置（支持 Claude / Codex / Antigravity 环境自动识别与适配） | `npx skills add SuGarMT/Skills@dbhub-util` |
 | git-skip | 本地开发配置文件 Git 跳过追踪 | `npx skills add SuGarMT/Skills@git-skip` |
 | karpathy-guidelines | 整合 Karpathy AI 编码行为指南到 CLAUDE.md/AGENTS.md/GEMINI.md | `npx skills add SuGarMT/Skills@karpathy-guidelines` |
 | frontend-slides | 零依赖富动画 HTML 演示文稿生成（支持 PPT/PPTX 转换） | `npx skills add SuGarMT/Skills@frontend-slides` |

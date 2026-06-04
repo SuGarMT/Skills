@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "dbhub-util-antigravity": {
+      "source": "SuGarMT/Skills",
+      "sourceType": "github",
+      "skillPath": "dbhub-util-antigravity/SKILL.md",
+      "computedHash": "84c62bab62e48f4506acf2497758d9702ad54fa040bbe4e56f7e2523ea029dbc"
+    }
+  }
+}
